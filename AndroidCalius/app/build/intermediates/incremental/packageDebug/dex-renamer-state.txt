@@ -1,0 +1,7 @@
+#Tue Mar 28 22:57:54 CST 2017
+base.0=C\:\\Users\\Elvia\\AndroidStudioProjects\\AndroidCalius\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_0dc9c4bde4bf92448e8c0a5aa01063df673d641e
+renamed.1=classes.dex
+renamed.0=classes2.dex
+file.1=C\:\\Users\\Elvia\\AndroidStudioProjects\\AndroidCalius\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_a287604addd8c4439d82a42c356e4a46dcff2b95\\classes.dex
+base.1=C\:\\Users\\Elvia\\AndroidStudioProjects\\AndroidCalius\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_a287604addd8c4439d82a42c356e4a46dcff2b95
+file.0=C\:\\Users\\Elvia\\AndroidStudioProjects\\AndroidCalius\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_0dc9c4bde4bf92448e8c0a5aa01063df673d641e\\classes.dex
