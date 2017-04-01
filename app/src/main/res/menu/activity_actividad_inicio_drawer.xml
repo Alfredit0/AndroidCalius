@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_cal"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Calificaciones" />
+        <item
+            android:id="@+id/nav_sim"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Simulador" />
+        <item
+            android:id="@+id/nav_not"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Notificaciones" />
+        <item
+            android:id="@+id/nav_acd"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Acerca de" />
+        <item
+            android:id="@+id/nav_ces"
+            android:icon="@drawable/ic_menu_send"
+            android:title="Cerrar sesión" />
+    </group>
+
+
+
+</menu>
