@@ -35,6 +35,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -43,10 +44,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -365,21 +369,44 @@ public class actividadAcceso extends AppCompatActivity implements LoaderCallback
         protected Boolean doInBackground(Void... params) {
             try {
                 Thread.sleep(2000);
+                Log.i("doInBackground","doInBackground");
 
-                //Para comprovar si la Network y Para comprovar si hay acceso a internet:
-                if(isNetDisponible() && isOnlineNet()){
-                    //return true;
-
-                    return  true;
-
+               //intancia de la conexion
+                conexion con=new conexion();
+                //Construimos el objeto cliente en formato JSON
+                JSONObject dato=con.convertirJson(mEmail,mPassword);
+                //conexion con el servidor
+                HttpsURLConnection conn=con.con();
+                //creando el envio de datos
+                con.enviarDatos(conn,dato);
+                //verificando el estado del servidor
+                int statusCode = conn.getResponseCode();
+                if(statusCode!=200){
+                        return false;
                 }else{
-                    return false;
+                    //obtenee la resuesta
+                    JSONObject response=con.obtenerRespuesta(conn);
+                    if( !response.getBoolean("statuscon") || !response.getBoolean("status")){
+                        return false;
+                    }else{
+                        //guardar la sesion en alguna parte
+                        ///////////////////////////////////
+                        return true;
+                    }
                 }
-
             } catch (InterruptedException e) {
                 e.printStackTrace();
                 return  false;
+            } catch (ProtocolException e) {
+                e.printStackTrace();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
+            return false;
         }
         @Override
         protected void onPostExecute(final Boolean success) {

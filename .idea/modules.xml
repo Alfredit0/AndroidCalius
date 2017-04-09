@@ -3,9 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AndroidCalius.iml" filepath="$PROJECT_DIR$/AndroidCalius.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AndroidCalius.iml" filepath="$PROJECT_DIR$/.idea/modules/AndroidCalius.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" />
     </modules>
   </component>
 </project>
