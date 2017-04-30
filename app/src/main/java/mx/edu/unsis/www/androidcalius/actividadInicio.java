@@ -87,16 +87,13 @@ public class actividadInicio extends AppCompatActivity
         if (id == R.id.nav_cal) {
             // Handle the camera action
             Toast.makeText(this,"Calificaciones y id "+id+"",Toast.LENGTH_SHORT).show();
-            fragmentManager.beginTransaction().replace(R.id.Contenedor, new fragmentoCalificaciones()).commit();
         } else if (id == R.id.nav_sim) {
             Toast.makeText(this,"simulador  y id "+id+"",Toast.LENGTH_SHORT).show();
-            fragmentManager.beginTransaction().replace(R.id.Contenedor, new fragmentoSimulador()).commit();
         } else if (id == R.id.nav_not) {
             Toast.makeText(this,"Notificaciones",Toast.LENGTH_SHORT).show();
-            fragmentManager.beginTransaction().replace(R.id.Contenedor,new FragmentoNotificaciones()).commit();
         } else if (id == R.id.nav_acd) {
             Toast.makeText(this,"Acerca de",Toast.LENGTH_SHORT).show();
-            fragmentManager.beginTransaction().replace(R.id.Contenedor,new fragmentoAcercaDe()).commit();
+
         } else if (id == R.id.nav_ces) {
             Toast.makeText(this,"Cerrar sesión",Toast.LENGTH_SHORT).show();
         }

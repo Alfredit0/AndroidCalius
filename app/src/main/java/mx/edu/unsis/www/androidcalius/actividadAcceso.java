@@ -352,6 +352,7 @@ public class actividadAcceso extends AppCompatActivity implements LoaderCallback
 
         private final String mEmail;
         private final String mPassword;
+        private int actividad=1;
         //para recibir el valor del servidor segun el analisis de la amtricula y la contraseña
         String valor;
 
@@ -371,12 +372,14 @@ public class actividadAcceso extends AppCompatActivity implements LoaderCallback
                 Thread.sleep(2000);
                 Log.i("doInBackground","doInBackground");
 
-               //intancia de la conexion
+               //intancia de la clase conexion
                 conexion con=new conexion();
                 //Construimos el objeto cliente en formato JSON
-                JSONObject dato=con.convertirJson(mEmail,mPassword);
+
+                JSONObject dato=con.convertirJson(mEmail,mPassword,actividad);
                 //conexion con el servidor
-                HttpsURLConnection conn=con.con();
+                URL url = new URL("https://calius.herokuapp.com/loginuser");
+                HttpsURLConnection conn=con.con(url);
                 //creando el envio de datos
                 con.enviarDatos(conn,dato);
                 //verificando el estado del servidor

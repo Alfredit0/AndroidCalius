@@ -6,4 +6,94 @@
     android:layout_height="match_parent"
     tools:context="mx.edu.unsis.www.androidcalius.actividadRegistro">
 
+    <RelativeLayout
+        android:layout_width="368dp"
+        android:layout_height="495dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="26dp">
+        <!-- Register progress -->
+        <ProgressBar
+            android:id="@+id/login_progress"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:visibility="gone" />
+
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/matricula"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="46dp"
+            android:text="@string/registroLabel"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="42dp"
+            tools:layout_editor_absoluteY="101dp" />
+
+        <AutoCompleteTextView
+            android:id="@+id/matricula"
+            android:layout_width="282dp"
+            android:layout_height="69dp"
+            android:layout_above="@+id/telefono"
+
+            android:layout_marginBottom="32dp"
+            android:drawableLeft="@drawable/ic_account_circle_black_48dp"
+            android:drawablePadding="@dimen/fab_margin"
+            android:hint="@string/prompt_email"
+            android:inputType="number"
+            android:maxLines="1"
+            android:singleLine="true"
+            tools:layout_editor_absoluteX="50dp"
+            tools:layout_editor_absoluteY="178dp"
+            android:layout_alignLeft="@+id/textView3"
+            android:layout_alignStart="@+id/textView3"
+            android:layout_alignRight="@+id/textView3"
+            android:layout_alignEnd="@+id/textView3" />
+
+        <AutoCompleteTextView
+            android:id="@+id/telefono"
+            android:layout_width="283dp"
+            android:layout_height="69dp"
+            android:layout_alignLeft="@+id/matricula"
+            android:layout_alignStart="@+id/matricula"
+            android:layout_centerVertical="true"
+
+            android:drawableLeft="@drawable/ic_phone_android_black_48dp"
+            android:drawablePadding="@dimen/fab_margin"
+            android:hint="@string/prompt_telefono"
+            android:inputType="number"
+            android:maxLines="1"
+            android:singleLine="true"
+            tools:layout_editor_absoluteX="51dp"
+            tools:layout_editor_absoluteY="256dp"
+            android:layout_alignRight="@+id/matricula"
+            android:layout_alignEnd="@+id/matricula" />
+
+        <Button
+            android:id="@+id/enviar"
+            style="?android:textAppearanceSmall"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="65dp"
+
+            android:background="#606060"
+            android:text="@string/enviar"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="67dp"
+            tools:layout_editor_absoluteY="388dp"
+            android:layout_below="@+id/telefono"
+            android:layout_centerHorizontal="true" />
+
+
+    </RelativeLayout>
+
+
 </android.support.constraint.ConstraintLayout>

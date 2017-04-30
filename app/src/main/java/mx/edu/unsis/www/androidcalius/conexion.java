@@ -24,8 +24,8 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class conexion {
 
-    public HttpsURLConnection con() throws IOException {
-        URL url = new URL("https://calius.herokuapp.com/loginuser");
+    public HttpsURLConnection con(URL url) throws IOException {
+        //URL url = new URL("https://calius.herokuapp.com/loginuser");
         HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
         conn.setRequestProperty("Content-Type", "application/json");
         conn.setDoOutput(true);//indica a la conexión que se permite el envío de datos hacia el servidor
@@ -34,11 +34,21 @@ public class conexion {
         return conn;
     }
 
-    public JSONObject convertirJson(String mEmail, String mPassword) throws JSONException {
+    public JSONObject convertirJson(String mEmail, String mPassword,int actividad) throws JSONException {
         JSONObject dato = new JSONObject();
         dato.put("passcon", "12345");
-        dato.put("iduser",mEmail);
-        dato.put("password",mPassword);
+        if(actividad==1){
+            dato.put("iduser",mEmail);
+            dato.put("password",mPassword);
+            dato.put("usuarioTipo",1);
+        }else{
+            if(actividad==2){
+                dato.put("iduser",mEmail);
+                dato.put("phone",mPassword);
+            }
+        }
+
+
         return dato;
     }
 
