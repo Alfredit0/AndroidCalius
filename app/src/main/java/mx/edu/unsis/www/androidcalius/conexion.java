@@ -23,7 +23,24 @@ import javax.net.ssl.HttpsURLConnection;
  */
 
 public class conexion {
+    private static String passcon="12345";
+    private static String iduser="";
 
+    /**Para comprovar si hay acceso a internet*/
+    public Boolean isOnlineNet() {
+        try {
+            Process p = java.lang.Runtime.getRuntime().exec("ping -c 1 www.google.es");
+
+            int val           = p.waitFor();
+            boolean reachable = (val == 0);
+            return reachable;
+
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return false;
+    }
     public HttpsURLConnection con(URL url) throws IOException {
         //URL url = new URL("https://calius.herokuapp.com/loginuser");
         HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
@@ -36,7 +53,7 @@ public class conexion {
 
     public JSONObject convertirJson(String mEmail, String mPassword,int actividad) throws JSONException {
         JSONObject dato = new JSONObject();
-        dato.put("passcon", "12345");
+        dato.put("passcon", passcon);
         if(actividad==1){
             dato.put("iduser",mEmail);
             dato.put("password",mPassword);
@@ -45,6 +62,14 @@ public class conexion {
             if(actividad==2){
                 dato.put("iduser",mEmail);
                 dato.put("phone",mPassword);
+            }else{
+                if(actividad==3){
+                    dato.put("iduser",mEmail);
+                    dato.put("code",mPassword);
+                }else if(actividad==4){
+                    dato.put("iduser",mEmail);
+                    dato.put("password",mPassword);
+                }
             }
         }
 
@@ -72,7 +97,35 @@ public class conexion {
         JSONObject response = new JSONObject(result.toString());
         return response;
     }
-    public static String getMD5(String input) {
-        return "hola";
+
+
+    //metodos para la comparticion de la valiable iduser
+    public static String getIduser() {
+        return iduser;
+    }
+
+    public static void setIduser(String iduser) {
+        conexion.iduser = iduser;
+    }
+
+
+    public String getMD5(String cadena) throws NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        byte[] b = md.digest(cadena.getBytes());
+
+        int size = b.length;
+        StringBuilder h = new StringBuilder(size);
+        for (int i = 0; i < size; i++) {
+            int u = b[i] & 255;
+            if (u < 16)
+            {
+                h.append("0").append(Integer.toHexString(u));
+            }
+            else
+            {
+                h.append(Integer.toHexString(u));
+            }
+        }
+        return h.toString();
     }
 }

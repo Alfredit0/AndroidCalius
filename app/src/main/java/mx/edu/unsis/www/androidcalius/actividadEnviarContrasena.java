@@ -10,9 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
@@ -24,73 +22,81 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.security.NoSuchAlgorithmException;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class actividadVerificarCodigo extends AppCompatActivity {
+public class actividadEnviarContrasena extends AppCompatActivity {
+
     //referecnia a los layouts IU
     private Registrar registrar = null;
 
-    private AutoCompleteTextView viewCodigo;
+    private AutoCompleteTextView viewContraseña;
+    private AutoCompleteTextView viewConfirm;
+
     private View mProgressView;
     private View mLoginFormView;
+
     //intancia de la conexion
     conexion con=new conexion();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_actividad_verificar_codigo);
-        //obtener la referencia a la IU
-        viewCodigo = (AutoCompleteTextView) findViewById(R.id.codigo);
-        viewCodigo.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == R.id.login || id == EditorInfo.IME_NULL) {
-                    //validar si es vacio y el formato que debe cumplir
+        setContentView(R.layout.activity_actividad_enviar_contrasena);
+        //obtener el contendo de la IU
+        viewContraseña = (AutoCompleteTextView) findViewById(R.id.contraseña);
+        viewConfirm = (AutoCompleteTextView) findViewById(R.id.confirmContraseña);
 
-                    return true;
-                }
-                return false;
-            }
-        });
-        Button verificar = (Button) findViewById(R.id.verificar);
-        verificar.setOnClickListener(new View.OnClickListener() {
+        Button guardar = (Button) findViewById(R.id.guardar);
+        guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //validar que no esten vacios los campos
-                validarCampo();
+                validarCampos();
             }
         });
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
     }
-    //metodo para validar el campo del código
-    private void validarCampo(){
-        /**comprobar si el objeto para el usuario esta vacio o no */
-        if (registrar != null) {
-            return;
-        }
-        //resetea loa errores
-        viewCodigo.setError(null);
 
-        // Obtiene y guarda los valores respectivos para codigo
-        String codigo = viewCodigo.getText().toString();
+    private void validarCampos(){
+
+        //validar formato del primero solamente
+        //validar comparacion
+
+        // Resetea los errores
+        viewContraseña.setError(null);
+        viewConfirm.setError(null);
+
+        // Obtiene y guarda los valores respectivos para el email y el password
+        String contraseña = viewContraseña.getText().toString();
+        String confirm = viewConfirm.getText().toString();
 
         //Bandera evidenciar algun error durante la validación de los datos
         boolean cancel = false;
         //Variable para contener el campo a ser enfocado
         View focusView = null;
 
-        if (TextUtils.isEmpty(codigo)) {
-            viewCodigo.setError(getString(R.string.error_field_required));
-            focusView = viewCodigo;
+        // Comprobar si el campo para el Email esta vacio.
+        if (TextUtils.isEmpty(contraseña)) {
+            viewContraseña.setError(getString(R.string.error_field_required));
+            focusView = viewContraseña;
             cancel = true;
-        }else if (codigo.length()!=4) {
-            viewCodigo.setError(getString(R.string.error_invalid_cod));
-            focusView = viewCodigo;
+        }else if(TextUtils.isEmpty(confirm)){
+            viewConfirm.setError(getString(R.string.error_field_required));
+            focusView = viewConfirm;
+            cancel = true;
+        } else if(contraseña.length()>10 || contraseña.length()<6){
+            viewContraseña.setError(getString(R.string.error_invalid_pass));
+            focusView = viewContraseña;
+            cancel = true;
+        }else if(!contraseña.equals(confirm)){
+            viewConfirm.setError(getString(R.string.error_coincidencia));
+            focusView = viewConfirm;
             cancel = true;
         }
+
+
         //Comprobar si hubo un fallo durante el ingreso de datos
         if (cancel) {
             //Enfocar el Campo del Error
@@ -100,7 +106,7 @@ public class actividadVerificarCodigo extends AppCompatActivity {
                 //Cargar Animación con una barra de progreso
                 //showProgress(true);
                 //Crea un nuevo Usuario a partir de la clase  mAuthTask
-                registrar = new Registrar(codigo);
+                registrar = new Registrar(contraseña);
                 //Lanzar el Hilo para la Autenticación del Usuario
                 registrar.execute((Void) null);
             }else{
@@ -111,14 +117,15 @@ public class actividadVerificarCodigo extends AppCompatActivity {
     }
     public class Registrar extends AsyncTask<Void, Void, Boolean> {
 
-        private final String codigo;
+        private String password;
         private String iduser;
+        private String paass;
 
-        private int actividad=3;
+        private int actividad=4;
 
         //Clase para Almacenar el registro
-        Registrar(String cod) {
-            this.codigo = cod;
+        Registrar(String pass) {
+            this.password = pass;
         }
         @Override
         protected void onPreExecute(){
@@ -128,11 +135,15 @@ public class actividadVerificarCodigo extends AppCompatActivity {
             try {
                 Thread.sleep(2000);
                 Log.i("doInBackground","doInBackground");
+                //obntener el iduser
                 iduser=con.getIduser();
+                //encriptar contraseña
+                paass=password;
+                password=con.getMD5(paass);
                 //Construimos el objeto cliente en formato JSON
-                JSONObject dato=con.convertirJson(iduser,codigo,actividad);
+                JSONObject dato=con.convertirJson(iduser,password,actividad);
                 //conexion con el servidor
-                URL url = new URL("https://calius.herokuapp.com/verifyusercode");
+                URL url = new URL("https://calius.herokuapp.com/saveuserpass");
                 HttpsURLConnection conn=con.con(url);
                 //creando el envio de datos
                 con.enviarDatos(conn,dato);
@@ -165,6 +176,8 @@ public class actividadVerificarCodigo extends AppCompatActivity {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
             }
             return false;
         }
@@ -175,11 +188,11 @@ public class actividadVerificarCodigo extends AppCompatActivity {
 
             if (success) {
                 finish();
-                Intent myIntent = new Intent(actividadVerificarCodigo.this,actividadEnviarContrasena.class);
-                actividadVerificarCodigo.this.startActivity(myIntent);
+                Intent myIntent = new Intent(actividadEnviarContrasena.this,actividadInicio.class);
+                actividadEnviarContrasena.this.startActivity(myIntent);
             } else {
-                viewCodigo.setError(getString(R.string.codigoIncorrecto));
-                viewCodigo.requestFocus();
+                viewConfirm.setError(getString(R.string.contraseñaFallida));
+                viewConfirm.requestFocus();
             }
         }
 

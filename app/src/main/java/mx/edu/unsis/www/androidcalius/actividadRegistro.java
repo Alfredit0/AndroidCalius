@@ -37,6 +37,8 @@ public class actividadRegistro extends AppCompatActivity {
 
     private View mProgressView;
     private View mLoginFormView;
+    //intancia de la conexion
+    conexion con=new conexion();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +105,7 @@ public class actividadRegistro extends AppCompatActivity {
             matricula.setError(getString(R.string.error_field_required));
             focusView = matricula;
             cancel = true;
-        } if (TextUtils.isEmpty(tel)) {
+        } else if (TextUtils.isEmpty(tel)) {
             telefono.setError(getString(R.string.error_field_required));
             focusView = telefono;
             cancel = true;
@@ -124,18 +126,21 @@ public class actividadRegistro extends AppCompatActivity {
             //Enfocar el Campo del Error
             focusView.requestFocus();
         } else {
-            //Cargar Animación con una barra de progreso
-            //showProgress(true);
-            //Crea un nuevo Usuario a partir de la clase  mAuthTask
+            if(con.isOnlineNet()){
+                //Cargar Animación con una barra de progreso
+                //showProgress(true);
+                //Crea un nuevo Usuario a partir de la clase  mAuthTask
                 registrar = new Registrar(id, tel);
-            //Lanzar el Hilo para la Autenticación del Usuario
+                //Lanzar el Hilo para la Autenticación del Usuario
                 registrar.execute((Void) null);
+            }else{
+                Toast.makeText(this,"Sin conexión",Toast.LENGTH_SHORT).show();
+            }
+
         }
 
 
     }
-
-
 
 
 
@@ -153,15 +158,14 @@ public class actividadRegistro extends AppCompatActivity {
         }
         @Override
         protected void onPreExecute(){
-            //showProgress(true);
+            showProgress(true);
         }
         protected Boolean doInBackground(Void... params) {
             try {
                 Thread.sleep(2000);
                 Log.i("doInBackground","doInBackground");
 
-                //intancia de la conexion
-                conexion con=new conexion();
+                con.setIduser(id);
                 //Construimos el objeto cliente en formato JSON
                 JSONObject dato=con.convertirJson(id,tel,actividad);
                 //conexion con el servidor
@@ -204,7 +208,7 @@ public class actividadRegistro extends AppCompatActivity {
         @Override
         protected void onPostExecute(final Boolean success) {
             registrar = null;
-            //showProgress(false);
+            showProgress(false);
 
             if (success) {
                 finish();
@@ -219,7 +223,7 @@ public class actividadRegistro extends AppCompatActivity {
         @Override
         protected void onCancelled() {
             registrar = null;
-            //showProgress(false);
+            showProgress(false);
         }
 
     }
@@ -259,4 +263,5 @@ public class actividadRegistro extends AppCompatActivity {
             mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
         }
     }
+
 }

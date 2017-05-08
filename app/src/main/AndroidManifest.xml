@@ -30,7 +30,8 @@
             android:label="@string/title_activity_actividad_inicio"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".actividadRegistro" />
-        <activity android:name=".actividadVerificarCodigo"></activity>
+        <activity android:name=".actividadVerificarCodigo" />
+        <activity android:name=".actividadEnviarContrasena"></activity>
     </application>
 
 </manifest>

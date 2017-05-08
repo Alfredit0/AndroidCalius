@@ -49,6 +49,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -85,6 +86,8 @@ public class actividadAcceso extends AppCompatActivity implements LoaderCallback
     private View mProgressView;
     private View mLoginFormView;
 
+    //intancia de la clase conexion
+    conexion con=new conexion();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -210,7 +213,7 @@ public class actividadAcceso extends AppCompatActivity implements LoaderCallback
             mEmailView.setError(getString(R.string.error_field_required));
             focusView = mEmailView;
             cancel = true;
-        } if (TextUtils.isEmpty(password)) {
+        }else if (TextUtils.isEmpty(password)) {
             mPasswordView.setError(getString(R.string.error_field_required));
             focusView = mPasswordView;
             cancel = true;
@@ -226,12 +229,17 @@ public class actividadAcceso extends AppCompatActivity implements LoaderCallback
             //Enfocar el Campo del Error
             focusView.requestFocus();
         } else {
-            //Cargar Animación con una barra de progreso
-            //showProgress(true);
-            //Crea un nuevo Usuario a partir de la clase  mAuthTask
-            mAuthTask = new UserLoginTask(email, password);
-            //Lanzar el Hilo para la Autenticación del Usuario
-            mAuthTask.execute((Void) null);
+            if(con.isOnlineNet()){
+                //Cargar Animación con una barra de progreso
+                //showProgress(true);
+                //Crea un nuevo Usuario a partir de la clase  mAuthTask
+                mAuthTask = new UserLoginTask(email, password);
+                //Lanzar el Hilo para la Autenticación del Usuario
+                mAuthTask.execute((Void) null);
+            }else{
+                Toast.makeText(this,"Sin conexión",Toast.LENGTH_SHORT).show();
+            }
+
         }
     }
     //Comprobar si un email es valido o no
@@ -351,7 +359,8 @@ public class actividadAcceso extends AppCompatActivity implements LoaderCallback
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
         private final String mEmail;
-        private final String mPassword;
+        private String mPassword;
+        private String passEncripatada;
         private int actividad=1;
         //para recibir el valor del servidor segun el analisis de la amtricula y la contraseña
         String valor;
@@ -371,11 +380,10 @@ public class actividadAcceso extends AppCompatActivity implements LoaderCallback
             try {
                 Thread.sleep(2000);
                 Log.i("doInBackground","doInBackground");
-
-               //intancia de la clase conexion
-                conexion con=new conexion();
+                //encriptacion del password
+                passEncripatada=mPassword;
+                mPassword=con.getMD5(passEncripatada);
                 //Construimos el objeto cliente en formato JSON
-
                 JSONObject dato=con.convertirJson(mEmail,mPassword,actividad);
                 //conexion con el servidor
                 URL url = new URL("https://calius.herokuapp.com/loginuser");
@@ -408,6 +416,8 @@ public class actividadAcceso extends AppCompatActivity implements LoaderCallback
                 e.printStackTrace();
             } catch (JSONException e) {
                 e.printStackTrace();
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
             }
             return false;
         }
@@ -431,32 +441,6 @@ public class actividadAcceso extends AppCompatActivity implements LoaderCallback
             mAuthTask = null;
             showProgress(false);
         }
-    }
-    /**METODO PARA  comprovar si la Network esta habilitada*/
-    private boolean isNetDisponible() {
-
-        ConnectivityManager connectivityManager = (ConnectivityManager)
-                getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        NetworkInfo actNetInfo = connectivityManager.getActiveNetworkInfo();
-
-        return (actNetInfo != null && actNetInfo.isConnected());
-    }
-    /**Para comprovar si hay acceso a internet*/
-    public Boolean isOnlineNet() {
-
-        try {
-            Process p = java.lang.Runtime.getRuntime().exec("ping -c 1 www.google.es");
-
-            int val           = p.waitFor();
-            boolean reachable = (val == 0);
-            return reachable;
-
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return false;
     }
 }
 

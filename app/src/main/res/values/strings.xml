@@ -9,16 +9,30 @@
     <string name="action_sign_in">Acceder</string>
     <string name="registro">Registro</string>
     <string name="enviar">Enviar</string>
+    <string name="verificar">Verificar</string>
+    <string name="codigo">Código</string>
+    <string name="guardar">Guardar</string>
+    <string name="contraseña">Contraseña</string>
+    <string name="confirmarContraseña">Confirmar</string>
 
     <string name="registroLabel">Ingrese los datos que se te piden:</string>
+    <string name="verificacionLabel">Ingrese código de verificación:</string>
+    <string name="contraseñaLabel">Ingrese una contraseña </string>
+    <string name="contraseñaLabel2">para su cuenta:</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">Formato de matrícula inválida</string>
     <string name="error_invalid_tel">Formato de teléfono inválida</string>
+    <string name="error_invalid_cod">Formato de código inválida</string>
+    <string name="error_invalid_pass">Formato de contraseña inválida</string>
 
     <string name="error_invalid_password">Contraseña muy corta</string>
     <string name="error_incorrect_password">Matrícula o contraseña incorrecta</string>
     <string name="usuarioExistente">Usuario existente</string>
+    <string name="codigoIncorrecto">Código incorrecto</string>
+    <string name="contraseñaFallida">No se pudo guardar la contraseña</string>
+
     <string name="error_field_required">Este campo es requerido</string>
+    <string name="error_coincidencia">Las contraseñas no coinciden</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
