@@ -45,6 +45,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
@@ -93,6 +94,20 @@ public class actividadAcceso extends AppCompatActivity implements LoaderCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_actividad_acceso);
+        try
+        {
+            BufferedReader opSesion = new BufferedReader(new InputStreamReader(openFileInput("sesion.txt")));
+
+            String texto = opSesion.readLine();
+            opSesion.close();
+            Intent myIntent = new Intent(actividadAcceso.this,actividadInicio.class);
+            actividadAcceso.this.startActivity(myIntent);
+        }
+        catch (Exception ex)
+        {
+            Log.e("Ficheros", "Error al leer fichero desde memoria interna");
+        }
+
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
@@ -400,8 +415,21 @@ public class actividadAcceso extends AppCompatActivity implements LoaderCallback
                     if( !response.getBoolean("statuscon") || !response.getBoolean("status")){
                         return false;
                     }else{
-                        //guardar la sesion en alguna parte
+                        //guardar la sesion
                         ///////////////////////////////////
+                        try
+                        {
+                            OutputStreamWriter Sesion=
+                                    new OutputStreamWriter(
+                                            openFileOutput("sesion.txt", Context.MODE_PRIVATE));
+
+                            Sesion.write(""+mEmail+":"+mPassword+"");
+                            Sesion.close();
+                        }
+                        catch (Exception exx)
+                        {
+                            Log.e("Ficheros", "Error al escribir fichero a memoria interna");
+                        }
                         return true;
                     }
                 }
