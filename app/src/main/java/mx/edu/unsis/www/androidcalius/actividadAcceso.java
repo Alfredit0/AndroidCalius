@@ -93,7 +93,7 @@ public class actividadAcceso extends AppCompatActivity implements LoaderCallback
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_actividad_acceso);
+
         try
         {
             BufferedReader opSesion = new BufferedReader(new InputStreamReader(openFileInput("sesion.txt")));
@@ -102,12 +102,13 @@ public class actividadAcceso extends AppCompatActivity implements LoaderCallback
             opSesion.close();
             Intent myIntent = new Intent(actividadAcceso.this,actividadInicio.class);
             actividadAcceso.this.startActivity(myIntent);
+            finish();
         }
         catch (Exception ex)
         {
             Log.e("Ficheros", "Error al leer fichero desde memoria interna");
         }
-
+        setContentView(R.layout.activity_actividad_acceso);
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();

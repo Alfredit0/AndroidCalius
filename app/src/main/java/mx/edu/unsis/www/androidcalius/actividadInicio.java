@@ -16,6 +16,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.io.File;
+
 public class actividadInicio extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -95,7 +97,18 @@ public class actividadInicio extends AppCompatActivity
             Toast.makeText(this,"Acerca de",Toast.LENGTH_SHORT).show();
 
         } else if (id == R.id.nav_ces) {
-            Toast.makeText(this,"Cerrar sesión",Toast.LENGTH_SHORT).show();
+            try {
+                File dir = getFilesDir();
+                File file = new File(dir, "sesion.txt");
+                boolean deleted = file.delete();
+                Intent inicio=new Intent(actividadInicio.this,actividadAcceso.class);
+                actividadInicio.this.startActivity(inicio);
+                finish();
+            }catch (Exception ex)
+            {
+                Toast.makeText(this,"Cerrar sesión",Toast.LENGTH_SHORT).show();
+            }
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
