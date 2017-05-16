@@ -9,6 +9,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -28,13 +29,15 @@ import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.Toast;
 
-<<<<<<< HEAD
+
 import java.util.ArrayList;
 import java.util.List;
 
-=======
+
 import java.io.File;
->>>>>>> origin/master
+
+import static mx.edu.unsis.www.androidcalius.R.id.drawer_layout;
+
 
 public class actividadInicio extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -47,16 +50,7 @@ public class actividadInicio extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -64,11 +58,12 @@ public class actividadInicio extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        setFragmet(new page_one());
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -102,14 +97,21 @@ public class actividadInicio extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+
         int id = item.getItemId();
         FragmentManager fragmentManager=getSupportFragmentManager();
 
+        Fragment fragment;
+
+
         if (id == R.id.nav_cal) {
+            setFragmet(new page_one());
+
+
             // Handle the camera action
             //Toast.makeText(this,"Calificaciones y id "+id+"",Toast.LENGTH_SHORT).show();
-            Intent prueba=new Intent(actividadInicio.this, prueba2.class);
-            startActivity(prueba);
+           // Intent prueba=new Intent(actividadInicio.this, prueba2.class);
+            //startActivity(prueba);
 
         } else if (id == R.id.nav_sim) {
             Toast.makeText(this,"simulador  y id "+id+"",Toast.LENGTH_SHORT).show();
@@ -133,8 +135,16 @@ public class actividadInicio extends AppCompatActivity
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+
         return true;
+    }
+    public void setFragmet(Fragment fragment){
+        if(fragment!=null){
+            FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.content_main,fragment);
+            ft.commit();
+        }
+        DrawerLayout drawer = (DrawerLayout) findViewById(drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
     }
 }

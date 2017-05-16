@@ -32,10 +32,6 @@
         <activity android:name=".actividadRegistro" />
         <activity android:name=".actividadVerificarCodigo" />
         <activity android:name=".actividadEnviarContrasena" />
-        <activity
-            android:name=".prueba2"
-            android:label="@string/title_activity_prueba2"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
