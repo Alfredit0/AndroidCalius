@@ -86,6 +86,7 @@ public class actividadAcceso extends AppCompatActivity implements LoaderCallback
             opSesion.close();
             Intent myIntent = new Intent(actividadAcceso.this,actividadInicio.class);
             actividadAcceso.this.startActivity(myIntent);
+            finish();
         }
         catch (Exception ex)
         {
