@@ -1,10 +1,18 @@
 package mx.edu.unsis.www.androidcalius;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,10 +22,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TabHost;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class actividadInicio extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    ViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +103,10 @@ public class actividadInicio extends AppCompatActivity
 
         if (id == R.id.nav_cal) {
             // Handle the camera action
-            Toast.makeText(this,"Calificaciones y id "+id+"",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this,"Calificaciones y id "+id+"",Toast.LENGTH_SHORT).show();
+            Intent prueba=new Intent(actividadInicio.this, prueba2.class);
+            startActivity(prueba);
+
         } else if (id == R.id.nav_sim) {
             Toast.makeText(this,"simulador  y id "+id+"",Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_not) {

@@ -24,15 +24,21 @@
     <string name="error_invalid_tel">Formato de teléfono inválida</string>
     <string name="error_invalid_cod">Formato de código inválida</string>
     <string name="error_invalid_pass">Formato de contraseña inválida</string>
-
     <string name="error_invalid_password">Contraseña muy corta</string>
     <string name="error_incorrect_password">Matrícula o contraseña incorrecta</string>
     <string name="usuarioExistente">Usuario existente</string>
     <string name="codigoIncorrecto">Código incorrecto</string>
     <string name="contraseñaFallida">No se pudo guardar la contraseña</string>
-
     <string name="error_field_required">Este campo es requerido</string>
     <string name="error_coincidencia">Las contraseñas no coinciden</string>
+
+    <!--titulos para las tabs-->
+    <string name="page1">P1</string>
+    <string name="page2">P2</string>
+    <string name="page3">P3</string>
+    <string name="page4">P4</string>
+    <string name="page5">P5</string>
+
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
@@ -50,4 +56,9 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="Calificaciones">Calificaciones</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_prueba2">prueba2</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 </resources>

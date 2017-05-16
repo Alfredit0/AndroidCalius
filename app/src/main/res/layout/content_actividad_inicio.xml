@@ -7,25 +7,4 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="mx.edu.unsis.www.androidcalius.actividadInicio"
     tools:showIn="@layout/app_bar_actividad_inicio">
-
-    <RelativeLayout
-        android:id="@+id/Contenedor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/registro"
-            style="?android:textAppearanceSmall"
-            android:layout_width="250dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:text="@string/registro"
-            android:textStyle="bold"
-            android:textColor="#FFFFFF"
-            android:background="#606060"
-            android:textSize="20dp"
-            android:textAllCaps="false"/>
-
-    </RelativeLayout>
-
 </android.support.constraint.ConstraintLayout>
