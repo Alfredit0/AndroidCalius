@@ -37,6 +37,7 @@
     <string name="page2">P2</string>
     <string name="page3">P3</string>
     <string name="page4">Ord</string>
+    <string name="page5">Final</string>
 
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."

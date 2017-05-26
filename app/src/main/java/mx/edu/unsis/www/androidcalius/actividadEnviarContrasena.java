@@ -3,6 +3,7 @@ package mx.edu.unsis.www.androidcalius;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -39,6 +40,8 @@ public class actividadEnviarContrasena extends AppCompatActivity {
 
     //intancia de la conexion
     conexion con=new conexion();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -160,8 +163,6 @@ public class actividadEnviarContrasena extends AppCompatActivity {
                     if( !response.getBoolean("statuscon") || !response.getBoolean("status")){
                         return false;
                     }else{
-                        //guardar la sesion en alguna parte
-                        ///////////////////////////////////
                         return true;
                     }
                 }

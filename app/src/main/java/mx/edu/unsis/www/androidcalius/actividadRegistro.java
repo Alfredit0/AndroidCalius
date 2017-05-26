@@ -184,6 +184,13 @@ public class actividadRegistro extends AppCompatActivity {
                     //obtenee la resuesta
                     JSONObject response=con.obtenerRespuesta(conn);
                     if( !response.getBoolean("statuscon") || !response.getBoolean("idstatus")||!response.getBoolean("procstatus")){
+                        //mandar los datos del registro IGCM
+                        //convertir JSON
+                        //conectar
+                        //anviar datos
+                        //obtener estado de codigo
+                        //obtener respuesta
+
                         return false;
                     }else{
                         //guardar la sesion en alguna parte

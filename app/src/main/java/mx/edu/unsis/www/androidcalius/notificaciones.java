@@ -1,7 +1,6 @@
 package mx.edu.unsis.www.androidcalius;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -9,26 +8,21 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.SimpleCursorAdapter;
-import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
-import android.text.Spanned;
-import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 
-public class page_one extends Fragment {
+public class notificaciones extends Fragment {
     View view;
     ViewPager viewPager;
     TabLayout tabLayout;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view= inflater.inflate(R.layout.fragment_page_one, container, false);
+        view= inflater.inflate(R.layout.fragment_notificaciones, container, false);
         viewPager =(ViewPager)view.findViewById(R.id.pager);
         viewPager.setAdapter(new sliderAdapter(getChildFragmentManager()));
         tabLayout=(TabLayout)view.findViewById(R.id.tabs);
@@ -40,26 +34,27 @@ public class page_one extends Fragment {
         });
         return view;
     }
-    private class sliderAdapter extends FragmentPagerAdapter{
-       // final String tabs[]={"tab1","tab2"};
+    private class sliderAdapter extends FragmentPagerAdapter {
+        // final String tabs[]={"tab1","tab2"};
 
         public sliderAdapter(FragmentManager fm) {
             super(fm);
         }
 
+
         @Override
         public Fragment getItem(int position) {
             switch (position){
                 case 0:
-                    return new contenidoP1();
+                    return new contenidoP1Notif();
                 case 1:
-                    return new contenidoP2();
+                    return new contenidoP2Notif();
                 case 2:
-                    return new contenidoP3();
+                    return new contenidoP3Notif();
                 case 3:
-                    return new contenidoOrd();
+                    return new contenidoOrdNotif();
                 case 4:
-                    return new contenidoFinal();
+                    return new contenidoFinalNotif();
                 default:
                     return null;
 
