@@ -10,6 +10,9 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 
 import mx.edu.unsis.www.androidcalius.conexion;
@@ -21,12 +24,14 @@ import mx.edu.unsis.www.androidcalius.conexion;
 public class baseDatos extends SQLiteOpenHelper {
     //creacion de la base de datos
     private static final String SQL = "create table USUARIO (MATRICULA TEXT PRIMARY KEY,PERIODO TEXT);";
+    private static final String SQL2 = "create table MATERIAS (IDMATERIA TEXT PRIMARY KEY,MATERIA TEXT,P1 REAL,P2 REAL, P3 REAL, ORD REAL);";
     public baseDatos(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL);
+        db.execSQL(SQL2);
     }
 
     @Override
@@ -79,13 +84,32 @@ public class baseDatos extends SQLiteOpenHelper {
                 System.out.println("El nombre es " +  cursor.getString(1) );}
         }
         //db.close();
-        System.out.print("el periodo es ");
+        System.out.print("el periodo es "+periodo);
         return periodo;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public Boolean eliminarDB(){
         return SQLiteDatabase.deleteDatabase(new File("/data/data/mx.edu.unsis.www.androidcalius/databases/calius.db"));
+    }
+
+
+    public void guardarMaterias(JSONObject materias){
+        //recorrer el json con un for e irlas inseratndo hasta que se leea todp
+
+        ContentValues valores =new ContentValues();
+        valores.put("IDMATERIA","id de materia de json");
+        valores.put("MATERIA","materia json");
+        this.getWritableDatabase().insert("MATERIAS",null,valores);
+    }
+    public void guardarCalificaciones(JSONObject calif) throws JSONException {
+        //recorrer el json añadido
+        ContentValues valores =new ContentValues();
+        valores.put("P1",1.0);
+        valores.put("P2",2.0);
+        valores.put("P3",3.0);
+        valores.put("ORD",4.0);
+        this.getWritableDatabase().update("MATERIAS",valores,"IDMATERIA = '"+calif.getString("idmateria").toString()+"'",null);
     }
 
 }

@@ -71,6 +71,9 @@ public class conexion {
                 }else if(actividad==4){
                     dato.put("iduser",mEmail);
                     dato.put("password",mPassword);
+                }else if(actividad==5){
+                    dato.put("iduser",mEmail);
+                    dato.put("periodo",mPassword);
                 }
             }
         }
@@ -129,17 +132,6 @@ public class conexion {
             }
         }
         return h.toString();
-    }
-
-    public boolean checkDataBase(String Database_path) {
-        SQLiteDatabase checkDB = null;
-        try {
-            checkDB = SQLiteDatabase.openDatabase(Database_path, null, SQLiteDatabase.OPEN_READONLY);
-            checkDB.close();
-        } catch (SQLiteException e) {
-            Log.e("Error", "No existe la base de datos " + e.getMessage());
-        }
-        return checkDB != null;
     }
 
 }

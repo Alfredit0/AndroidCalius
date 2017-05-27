@@ -48,10 +48,9 @@ public class actividadInicio extends AppCompatActivity
     private String iduser;
     private String Database_path="/data/data/mx.edu.unsis.www.androidcalius/databases/calius.db";
 
+    //metodos para obtener el periodo
+    private void obtenerPeriodo() {
 
-    private void obtenerPerido(String iduser) {
-        final boolean[] isPeriodo = {false};
-        final String[] periodo = {null};
         new AsyncTask<Object, Object, Object>() {
             @Override
             protected void onPostExecute(final Object result) {
@@ -71,15 +70,12 @@ public class actividadInicio extends AppCompatActivity
 
                     int statusCode = conn.getResponseCode();
                     if(statusCode!=200){
-                        //return false;
-                        isPeriodo[0] =false;
+
                     }else{
                         JSONObject response=con.obtenerRespuesta(conn);
-                        periodo[0] =response.get("periodo").toString();
                         Log.i("Demo getPeriodo", "Periodo "+response.get("periodo").toString());
                         //actualizar la tabla usuario insertando el periodo
                         datos.actualizarUsuario(datos.leerUsuario(),response.get("periodo").toString());
-                        isPeriodo[0]=true;
                     }
 
                 } catch (MalformedURLException e) {
@@ -89,11 +85,93 @@ public class actividadInicio extends AppCompatActivity
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                return periodo[0];
+                return "";
             }
         }.execute(this, null, null);
     }
+    //
+    private void obtenerMaterias() {
 
+        new AsyncTask<Object, Object, Object>() {
+            @Override
+            protected void onPostExecute(final Object result) {
+            }
+
+            @Override
+            protected String doInBackground(final Object... params) {
+                int actividad=5;
+                URL url = null;
+                try {
+                    //Construimos el objeto cliente en formato JSON
+                    JSONObject dato=con.convertirJson(datos.leerUsuario(),datos.leerPeriodo(),actividad);
+                    //conexion con el servidor
+                    url = new URL("https://calius.herokuapp.com /materias");
+                    HttpsURLConnection conn=con.con(url);
+
+                    //creando el envio de datos
+                    con.enviarDatos(conn,dato);
+                    //verificando el estado del servidor
+                    int statusCode = conn.getResponseCode();
+
+                    if(statusCode!=200){
+
+                    }else{
+                        JSONObject response=con.obtenerRespuesta(conn);
+                        //descomponer el json y guardarlas en la n¡base de datos en la tabla materias
+                        datos.guardarMaterias(response);
+                    }
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                return "";
+            }
+        }.execute(this, null, null);
+    }
+    public void obtenerCalificaciones(){
+
+        new AsyncTask<Object, Object, Object>() {
+            @Override
+            protected void onPostExecute(final Object result) {
+            }
+
+            @Override
+            protected String doInBackground(final Object... params) {
+                int actividad=5;
+                URL url = null;
+                try {
+                    //Construimos el objeto cliente en formato JSON
+                    JSONObject dato=con.convertirJson(datos.leerUsuario(),datos.leerPeriodo(),actividad);
+                    //conexion con el servidor
+                    url = new URL("https://calius.herokuapp.com /calificaciones");
+                    HttpsURLConnection conn=con.con(url);
+
+                    //creando el envio de datos
+                    con.enviarDatos(conn,dato);
+                    //verificando el estado del servidor
+                    int statusCode = conn.getResponseCode();
+
+                    if(statusCode!=200){
+
+                    }else{
+                        JSONObject response=con.obtenerRespuesta(conn);
+                        //descomponer el json y guardarlas en la n¡base de datos en la tabla materias
+                        datos.guardarCalificaciones(response);
+                    }
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                return "";
+            }
+        }.execute(this, null, null);
+    }
 
 
     @Override
@@ -116,32 +194,17 @@ public class actividadInicio extends AppCompatActivity
             //seleccionarla y mandar a pedir las calificaciones
             Toast.makeText(this, "Ya hay usuario"+datos.leerUsuario()+" Periodo "+datos.leerPeriodo(), Toast.LENGTH_SHORT).show();
         }else{
-            //es la primera vez por tabto se guarada el usuario que trago arrastrando
+            //es la primera vez guaradar al usuario en la base de datos
             datos.insertarUsuario(con.getIduser(),"");
             //pedir el periodo
-            obtenerPerido(datos.leerUsuario());
+            obtenerPeriodo();
+            //pedir las materias
+            obtenerMaterias();
+            //pedir callificaciones
+            obtenerCalificaciones();
             Toast.makeText(this, "Peridodo "+datos.leerPeriodo(), Toast.LENGTH_SHORT).show();
             Toast.makeText(this, "No existe usuario en BD pero el get si "+con.getIduser(), Toast.LENGTH_SHORT).show();
         }
-
-
-        /*datos.insertarUsuario("2012060155","");
-        if(datos.leerUsuario()==null){
-            Toast.makeText(this, "Sin usuario", Toast.LENGTH_SHORT).show();
-        }else{
-            Toast.makeText(this, "Con usuario", Toast.LENGTH_SHORT).show();
-        }*/
-        //Toast.makeText(this, "matricula en inicio "+datos.leerUsuario(), Toast.LENGTH_SHORT).show();
-        //verificar si existe la base de datos
-/*        if(check!=null){
-            Toast.makeText(this, "existe la base de datos", Toast.LENGTH_SHORT).show();
-            baseDatos datos= new baseDatos(this, "calius",null,1);
-            datos.abrir();
-            Toast.makeText(this, "matricula en inicio "+datos.leerUsuario(), Toast.LENGTH_SHORT).show();
-        }else{
-            Toast.makeText(this, "no existe la base de datos", Toast.LENGTH_SHORT).show();
-        }
-*/
         //si existe
             //identificar la referencia a esa base de datos
             //seleccionar la matricula de la tabla usuario
