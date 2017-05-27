@@ -279,7 +279,7 @@ public class actividadInicio extends AppCompatActivity
             setFragmet(new page_one());
 
         } else if (id == R.id.nav_sim) {
-            setFragmet(new notificaciones());
+            setFragmet(new simulador());
         } else if (id == R.id.nav_not) {
             Toast.makeText(this,"Notificaciones",Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_acd) {

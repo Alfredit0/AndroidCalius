@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-public class notificaciones extends Fragment {
+public class simulador extends Fragment {
     View view;
     ViewPager viewPager;
     TabLayout tabLayout;
@@ -22,7 +22,7 @@ public class notificaciones extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view= inflater.inflate(R.layout.fragment_notificaciones, container, false);
+        view= inflater.inflate(R.layout.fragment_simulador, container, false);
         viewPager =(ViewPager)view.findViewById(R.id.pager);
         viewPager.setAdapter(new sliderAdapter(getChildFragmentManager()));
         tabLayout=(TabLayout)view.findViewById(R.id.tabs);
@@ -34,6 +34,7 @@ public class notificaciones extends Fragment {
         });
         return view;
     }
+
     private class sliderAdapter extends FragmentPagerAdapter {
         // final String tabs[]={"tab1","tab2"};
 
@@ -46,15 +47,15 @@ public class notificaciones extends Fragment {
         public Fragment getItem(int position) {
             switch (position){
                 case 0:
-                    return new contenidoP1Notif();
+                    return new contenidoP1Simul();
                 case 1:
-                    return new contenidoP2Notif();
+                    return new contenidoP2Simul();
                 case 2:
-                    return new contenidoP3Notif();
+                    return new contenidoP3Simul();
                 case 3:
-                    return new contenidoOrdNotif();
+                    return new contenidoOrdSimul();
                 case 4:
-                    return new contenidoFinalNotif();
+                    return new contenidoFinalSimul();
                 default:
                     return null;
 
@@ -85,5 +86,6 @@ public class notificaciones extends Fragment {
             }
         }
     }
+
 
 }

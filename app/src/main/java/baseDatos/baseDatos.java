@@ -98,7 +98,7 @@ public class baseDatos extends SQLiteOpenHelper {
     public void guardarMaterias(JSONObject materias) throws JSONException {
         //recorrer el json con un for e irlas inseratndo hasta que se leea todp
 
-        ContentValues valores =new ContentValues();
+
         //convertir el objeto en array
         JSONArray materia = new JSONArray(materias.getJSONArray("materias").toString());
         int i = 0;
@@ -107,6 +107,7 @@ public class baseDatos extends SQLiteOpenHelper {
         //Recorrer el Array
         for( i = 0; i < materia.length(); i++) {
             //Creamos el objeto para leer lo que viene en la posición i
+            ContentValues valores =new ContentValues();
             JSONObject orden = materia.getJSONObject(i);
             materiaId = orden.getString("idMateria");
             nombreMateria = orden.getString("materiaId");
@@ -117,8 +118,7 @@ public class baseDatos extends SQLiteOpenHelper {
         }
     }
     public void guardarCalificaciones(JSONObject calif) throws JSONException {
-        //recorrer el json añadido
-        ContentValues valores =new ContentValues();
+
         //convertir el objeto en array
         JSONArray calificacion = new JSONArray(calif.getJSONArray("calificaciones").toString());
         int i = 0;
@@ -126,6 +126,7 @@ public class baseDatos extends SQLiteOpenHelper {
         Double parcial1 = null,parcial2= null,parcial3= null,ordinario= null;
         //Recorrer el Array
         for( i = 0; i < calificacion.length(); i++){
+            ContentValues valores =new ContentValues();
             //Creamos el objeto para leer lo que viene en la posición i
             JSONObject orden = calificacion.getJSONObject(i);
             materiaId = orden.getString("materiaId");
