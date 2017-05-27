@@ -10,6 +10,7 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -94,22 +95,52 @@ public class baseDatos extends SQLiteOpenHelper {
     }
 
 
-    public void guardarMaterias(JSONObject materias){
+    public void guardarMaterias(JSONObject materias) throws JSONException {
         //recorrer el json con un for e irlas inseratndo hasta que se leea todp
 
         ContentValues valores =new ContentValues();
-        valores.put("IDMATERIA","id de materia de json");
-        valores.put("MATERIA","materia json");
-        this.getWritableDatabase().insert("MATERIAS",null,valores);
+        //convertir el objeto en array
+        JSONArray materia = new JSONArray(materias.getJSONArray("materias").toString());
+        int i = 0;
+        String materiaId = "";
+        String nombreMateria="";
+        //Recorrer el Array
+        for( i = 0; i < materia.length(); i++) {
+            //Creamos el objeto para leer lo que viene en la posición i
+            JSONObject orden = materia.getJSONObject(i);
+            materiaId = orden.getString("idMateria");
+            nombreMateria = orden.getString("materiaId");
+            valores.put("IDMATERIA",materiaId);
+
+            valores.put("MATERIA",nombreMateria);
+            this.getWritableDatabase().insert("MATERIAS",null,valores);
+        }
     }
     public void guardarCalificaciones(JSONObject calif) throws JSONException {
         //recorrer el json añadido
         ContentValues valores =new ContentValues();
-        valores.put("P1",1.0);
-        valores.put("P2",2.0);
-        valores.put("P3",3.0);
-        valores.put("ORD",4.0);
-        this.getWritableDatabase().update("MATERIAS",valores,"IDMATERIA = '"+calif.getString("idmateria").toString()+"'",null);
+        //convertir el objeto en array
+        JSONArray calificacion = new JSONArray(calif.getJSONArray("calificaciones").toString());
+        int i = 0;
+        String materiaId = "";
+        Double parcial1 = null,parcial2= null,parcial3= null,ordinario= null;
+        //Recorrer el Array
+        for( i = 0; i < calificacion.length(); i++){
+            //Creamos el objeto para leer lo que viene en la posición i
+            JSONObject orden = calificacion.getJSONObject(i);
+            materiaId = orden.getString("materiaId");
+
+            parcial1 = orden.getDouble("parcial1");
+            parcial2= orden.getDouble("parcial2");
+            parcial3 = orden.getDouble("parcial3");
+            ordinario= orden.getDouble("ordinario");
+            valores.put("P1",parcial1);
+            valores.put("P2",parcial2);
+            valores.put("P3",parcial3);
+            valores.put("ORD",ordinario);
+            this.getWritableDatabase().update("MATERIAS",valores,"IDMATERIA = '"+materiaId+"'",null);
+        }
+
     }
 
 }

@@ -119,6 +119,7 @@ public class actividadInicio extends AppCompatActivity
                         JSONObject response=con.obtenerRespuesta(conn);
                         //descomponer el json y guardarlas en la n¡base de datos en la tabla materias
                         datos.guardarMaterias(response);
+
                     }
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
