@@ -50,26 +50,31 @@ public class contenidoP1 extends Fragment {
         datos= new baseDatos(getContext(), "calius",null,1);
         datos.abrir();
         String[] matCal;
-        matCal=datos.materiasEnVistas(1,1);
-        materia1.setText(matCal[0]);
-        p3Mt1.setText(matCal[1]);
-        promedio=Double.parseDouble(matCal[1])+promedio;
-        matCal=datos.materiasEnVistas(2,1);
-        materia2.setText(matCal[0]);
-        p3Mt2.setText(matCal[1]);
-        promedio=Double.parseDouble(matCal[1])+promedio;
-        matCal=datos.materiasEnVistas(3,1);
-        materia3.setText(matCal[0]);
-        p3Mt3.setText(matCal[1]);
-        promedio=Double.parseDouble(matCal[1])+promedio;
-        matCal=datos.materiasEnVistas(4,1);
-        materia4.setText(matCal[0]);
-        p3Mt4.setText(matCal[1]);
-        promedio=Double.parseDouble(matCal[1])+promedio;
-        matCal=datos.materiasEnVistas(5,1);
-        materia5.setText(matCal[0]);
-        p3Mt5.setText(matCal[1]);
-        promedio=Double.parseDouble(matCal[1])+promedio;
+        try {
+            matCal=datos.materiasEnVistas(1,1);
+            materia1.setText(matCal[0]);
+            p3Mt1.setText(matCal[1]);
+            promedio=Double.parseDouble(matCal[1])+promedio;
+            matCal=datos.materiasEnVistas(2,1);
+            materia2.setText(matCal[0]);
+            p3Mt2.setText(matCal[1]);
+            promedio=Double.parseDouble(matCal[1])+promedio;
+            matCal=datos.materiasEnVistas(3,1);
+            materia3.setText(matCal[0]);
+            p3Mt3.setText(matCal[1]);
+            promedio=Double.parseDouble(matCal[1])+promedio;
+            matCal=datos.materiasEnVistas(4,1);
+            materia4.setText(matCal[0]);
+            p3Mt4.setText(matCal[1]);
+            promedio=Double.parseDouble(matCal[1])+promedio;
+            matCal=datos.materiasEnVistas(5,1);
+            materia5.setText(matCal[0]);
+            p3Mt5.setText(matCal[1]);
+            promedio=Double.parseDouble(matCal[1])+promedio;
+        }catch (Exception e){
+
+        }
+
         promedio=promedio/5;
         //para promedio tengo que sumar
         buttonPromedio=(Button)view.findViewById(R.id.prom);
