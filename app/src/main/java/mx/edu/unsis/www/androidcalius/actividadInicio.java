@@ -1,5 +1,6 @@
 package mx.edu.unsis.www.androidcalius;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -103,9 +104,9 @@ public class actividadInicio extends AppCompatActivity
                 URL url = null;
                 try {
                     //Construimos el objeto cliente en formato JSON
-                    JSONObject dato=con.convertirJson(datos.leerUsuario(),datos.leerPeriodo(),actividad);
+                    JSONObject dato=con.convertirJson(datos.leerUsuario(),"2017-A",actividad);
                     //conexion con el servidor
-                    url = new URL("https://calius.herokuapp.com /materias");
+                    url = new URL("https://calius.herokuapp.com/materias");
                     HttpsURLConnection conn=con.con(url);
 
                     //creando el envio de datos
@@ -117,9 +118,14 @@ public class actividadInicio extends AppCompatActivity
 
                     }else{
                         JSONObject response=con.obtenerRespuesta(conn);
+                        //Log.i("Materias","Obteniendo materias con valor de true");
                         //descomponer el json y guardarlas en la n¡base de datos en la tabla materias
-                        datos.guardarMaterias(response);
-
+                        if(response.getBoolean("statuscon")){
+                            Log.i("Materias","Obteniendo materias con valor de true"+response.length());
+                            datos.guardarMaterias(response);
+                        }else{
+                            Log.i("Materias","Obteniendo materias con valor de falso");
+                        }
                     }
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
@@ -145,11 +151,10 @@ public class actividadInicio extends AppCompatActivity
                 URL url = null;
                 try {
                     //Construimos el objeto cliente en formato JSON
-                    JSONObject dato=con.convertirJson(datos.leerUsuario(),datos.leerPeriodo(),actividad);
+                    JSONObject dato=con.convertirJson(datos.leerUsuario(),"2017-A",actividad);
                     //conexion con el servidor
-                    url = new URL("https://calius.herokuapp.com /calificaciones");
+                    url = new URL("https://calius.herokuapp.com/calificaciones");
                     HttpsURLConnection conn=con.con(url);
-
                     //creando el envio de datos
                     con.enviarDatos(conn,dato);
                     //verificando el estado del servidor
@@ -159,8 +164,13 @@ public class actividadInicio extends AppCompatActivity
 
                     }else{
                         JSONObject response=con.obtenerRespuesta(conn);
+                        if(response.getBoolean("statuscon")){
+                            Log.i("Calificaciones","Obteniendo calificaiones con valor de true");
+                            datos.guardarCalificaciones(response);
+                        }else{
+                            Log.i("Calificaciones","Obteniendo Calificaciones con valor de  false");
+                        }
                         //descomponer el json y guardarlas en la n¡base de datos en la tabla materias
-                        datos.guardarCalificaciones(response);
                     }
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
@@ -187,45 +197,53 @@ public class actividadInicio extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-
+        //creando el contexto
+        Context contexto = this;
+        //verificacion de la base de datos
         datos= new baseDatos(this, "calius",null,1);
         datos.abrir();
         if(datos.leerUsuario()!=null){
-            //si hay un usuario
-            //seleccionarla y mandar a pedir las calificaciones
+            if(datos.leerPeriodo()==null){
+                //si falla el pedido del periodo en primera instancia
+                obtenerPeriodo();
+                obtenerMaterias();
+                obtenerCalificaciones();
+            }else{
+                if(datos.leerMaterias(1)==null){
+                    //si falla el pedido de materias en primera intancia
+                    obtenerMaterias();
+                    obtenerCalificaciones();
+                }else{
+                    if(datos.leerMaterias(0)==null){
+                        //si falla el pedido de calificaciones en primera instancia
+                        obtenerCalificaciones();
+                    }else{
+                        //No hubo nigun fallo pero se tienen que actualizar las calificaciones
+                        datos.leerMaterias(1);
+                        obtenerCalificaciones();
+
+                    }
+                }
+            }
+            //prueba de que este el usuario
             Toast.makeText(this, "Ya hay usuario"+datos.leerUsuario()+" Periodo "+datos.leerPeriodo(), Toast.LENGTH_SHORT).show();
         }else{
-            //es la primera vez guaradar al usuario en la base de datos
-            datos.insertarUsuario(con.getIduser(),"");
-            //pedir el periodo
-            obtenerPeriodo();
-            //pedir las materias
-            obtenerMaterias();
-            //pedir callificaciones
-            obtenerCalificaciones();
+            //En primera instacnia se guarda el usuario
+            datos.insertarUsuario(con.getIduser());
+            try {
+                //pedir el periodo
+                obtenerPeriodo();
+                //pedir las materias
+                obtenerMaterias();
+                //pedir callificaciones
+                obtenerCalificaciones();
+            }catch (Exception e){
+                Log.i("Error al obtener datos","");
+            }
+
             Toast.makeText(this, "Peridodo "+datos.leerPeriodo(), Toast.LENGTH_SHORT).show();
             Toast.makeText(this, "No existe usuario en BD pero el get si "+con.getIduser(), Toast.LENGTH_SHORT).show();
         }
-        //si existe
-            //identificar la referencia a esa base de datos
-            //seleccionar la matricula de la tabla usuario
-            //llamar las caificaciones mandando la matricula
-        //si no existe
-            //crear la base de datos insetar el iduser
-            //mandar a llamar el perioso mandando la matricula
-            //mandar a llamar las materias mandando la matricula
-            //mandar a llamar las calificaciones mandando la matricula
-        /*
-        try {
-            baseDatos datos= new baseDatos(this, "calius",null,1);
-            datos.abrir();
-            Toast.makeText(this, "matricula en inicio "+datos.leerUsuario(), Toast.LENGTH_SHORT).show();
-
-        }catch (Exception e){
-
-        }*/
-
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         setFragmet(new page_one());
@@ -271,13 +289,9 @@ public class actividadInicio extends AppCompatActivity
 
         int id = item.getItemId();
         FragmentManager fragmentManager=getSupportFragmentManager();
-
         Fragment fragment;
-
-
         if (id == R.id.nav_cal) {
             setFragmet(new page_one());
-
         } else if (id == R.id.nav_sim) {
             setFragmet(new simulador());
         } else if (id == R.id.nav_not) {
@@ -287,14 +301,7 @@ public class actividadInicio extends AppCompatActivity
 
         } else if (id == R.id.nav_ces) {
             try {
-
-                baseDatos db=new baseDatos(this, "calius",null,1);
-                //eliminar los registros de la base de datos usuario
-                if(db.eliminarDB()){
-                    Toast.makeText(this, "SE elimino la base de datos", Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(this, "No se elimino la base de datos", Toast.LENGTH_SHORT).show();
-                }
+                actividadInicio.this.deleteDatabase("calius");
             }catch (Exception e){}
             try {
                 File dir = getFilesDir();

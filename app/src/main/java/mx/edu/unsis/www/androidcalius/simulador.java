@@ -64,7 +64,7 @@ public class simulador extends Fragment {
 
         @Override
         public int getCount() {
-            return 4;
+            return 5;
         }
         @Override
         public CharSequence getPageTitle(int position){

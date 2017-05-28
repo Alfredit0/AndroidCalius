@@ -37,7 +37,6 @@ public class baseDatos extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
     }
     public void abrir(){
         this.getWritableDatabase();
@@ -46,10 +45,10 @@ public class baseDatos extends SQLiteOpenHelper {
         this.close();
     }
     //inserar registro
-    public  void insertarUsuario(String matricula,String periodo){
+    public  void insertarUsuario(String matricula){
         ContentValues valores =new ContentValues();
         valores.put("MATRICULA",matricula);
-        valores.put("PERIODO",periodo);
+        //valores.put("PERIODO",periodo);
         this.getWritableDatabase().insert("USUARIO",null,valores);
     }
 
@@ -96,29 +95,31 @@ public class baseDatos extends SQLiteOpenHelper {
 
 
     public void guardarMaterias(JSONObject materias) throws JSONException {
+        //System.out.println("En guardar materias... " );
         //recorrer el json con un for e irlas inseratndo hasta que se leea todp
-
-
         //convertir el objeto en array
         JSONArray materia = new JSONArray(materias.getJSONArray("materias").toString());
+
         int i = 0;
         String materiaId = "";
         String nombreMateria="";
+        System.out.println("Antes del for... "+  materia.length());
         //Recorrer el Array
         for( i = 0; i < materia.length(); i++) {
+            System.out.println("Despues del for... " );
             //Creamos el objeto para leer lo que viene en la posición i
             ContentValues valores =new ContentValues();
             JSONObject orden = materia.getJSONObject(i);
             materiaId = orden.getString("idMateria");
-            nombreMateria = orden.getString("materiaId");
+            nombreMateria = orden.getString("nombreMateria");
             valores.put("IDMATERIA",materiaId);
-
             valores.put("MATERIA",nombreMateria);
-            this.getWritableDatabase().insert("MATERIAS",null,valores);
+           this.getWritableDatabase().insert("MATERIAS",null,valores);
+            System.out.println("Guardadndo materias... " );
         }
     }
     public void guardarCalificaciones(JSONObject calif) throws JSONException {
-
+        System.out.println("En guardar calificaciones... " );
         //convertir el objeto en array
         JSONArray calificacion = new JSONArray(calif.getJSONArray("calificaciones").toString());
         int i = 0;
@@ -140,8 +141,59 @@ public class baseDatos extends SQLiteOpenHelper {
             valores.put("P3",parcial3);
             valores.put("ORD",ordinario);
             this.getWritableDatabase().update("MATERIAS",valores,"IDMATERIA = '"+materiaId+"'",null);
+            System.out.println("Guardadndo calificaciones... " );
         }
 
     }
+    public String leerMaterias(int var){
+        String idMateria=null;
+        String calif1=null;
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cursor;
+        cursor=db.query("MATERIAS",new String []{"IDMATERIA","MATERIA","P1","P2","P3","ORD"},"",null,null,null,null);
+        if(cursor.moveToFirst()){
+            if (cursor != null){
+                cursor.moveToFirst();
+                System.out.println("IDMATERIA " +  cursor.getString(0) );
+                System.out.println("MATERIA " +  cursor.getString(1) );
+                System.out.println("P1 " +  cursor.getString(2) );
+                System.out.println("P2 " +  cursor.getString(3) );
+                System.out.println("P3 " +  cursor.getString(4) );
+                System.out.println("ORD " +  cursor.getString(5) );
+                idMateria=cursor.getString(0);
+                calif1=cursor.getString(2);
+            }
+        }
+        //db.close();
+        if(var==1){
+            return idMateria;
+        }else{
+            return  calif1;
+        }
 
+    }
+    public String[] materiasEnVistas(int i,int p){
+        String[] matCal={null,null};
+        int cont=0;
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cursor;
+        cursor=db.query("MATERIAS",new String []{"MATERIA","P1","P2","P3","ORD"},"",null,null,null,null);
+        while (cursor.moveToNext()){
+            cont++;
+            if(cont==i){
+                matCal[0]=cursor.getString(0);
+                if(p==1){
+                    matCal[1]=cursor.getString(1);
+                }else if(p==2){
+                    matCal[1]=cursor.getString(2);
+                }else if(p==3){
+                    matCal[1]=cursor.getString(3);
+                } else{
+                    matCal[1]=cursor.getString(4);
+                }
+                break;
+            }
+        }
+        return matCal;
+    }
 }
