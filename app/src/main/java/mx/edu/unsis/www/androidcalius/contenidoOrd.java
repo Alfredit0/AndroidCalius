@@ -21,11 +21,11 @@ public class contenidoOrd extends Fragment {
     //IU de los botones
     private Button p3Mt1,p3Mt2,p3Mt3,p3Mt4,p3Mt5,buttonPromedio;
     baseDatos datos;
-    double promedio=0.0;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.fragment_contenido_ord, container, false);
+        double promedio=0.0;
         // Inflate the layout for this fragment
         //Toast.makeText(getContext(), "Hola contenido Ordinario", Toast.LENGTH_SHORT).show();
         //mandar a llamr los elementos del fragmentos text view y notones

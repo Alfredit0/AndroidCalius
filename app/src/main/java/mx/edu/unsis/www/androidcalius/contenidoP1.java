@@ -25,13 +25,14 @@ public class contenidoP1 extends Fragment {
     //IU de los botones
     private Button p3Mt1,p3Mt2,p3Mt3,p3Mt4,p3Mt5,buttonPromedio;
     baseDatos datos;
-    double promedio=0.0;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view =inflater.inflate(R.layout.fragment_contenido_p1, container, false);
         activity=getActivity();
+        double promedio=0.0;
         //Toast.makeText(activity, "Hola contenido parcial 1", Toast.LENGTH_SHORT).show();
         // Inflate the layout for this fragment
         //mandar a llamr los elementos del fragmentos text view y notones
@@ -71,14 +72,13 @@ public class contenidoP1 extends Fragment {
             materia5.setText(matCal[0]);
             p3Mt5.setText(matCal[1]);
             promedio=Double.parseDouble(matCal[1])+promedio;
+            promedio=promedio/5;
+            //para promedio tengo que sumar
+            buttonPromedio=(Button)view.findViewById(R.id.prom);
+            buttonPromedio.setText(String.valueOf(promedio).substring(0,3));
         }catch (Exception e){
 
         }
-
-        promedio=promedio/5;
-        //para promedio tengo que sumar
-        buttonPromedio=(Button)view.findViewById(R.id.prom);
-        buttonPromedio.setText(String.valueOf(promedio).substring(0,3));
         return view;
     }
 
