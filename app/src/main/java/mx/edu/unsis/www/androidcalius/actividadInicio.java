@@ -104,7 +104,7 @@ public class actividadInicio extends AppCompatActivity
                 URL url = null;
                 try {
                     //Construimos el objeto cliente en formato JSON
-                    JSONObject dato=con.convertirJson(datos.leerUsuario(),"2017-A",actividad);
+                    JSONObject dato=con.convertirJson(datos.leerUsuario(),datos.leerPeriodo(),actividad);
                     //conexion con el servidor
                     url = new URL("https://calius.herokuapp.com/materias");
                     HttpsURLConnection conn=con.con(url);
@@ -151,7 +151,7 @@ public class actividadInicio extends AppCompatActivity
                 URL url = null;
                 try {
                     //Construimos el objeto cliente en formato JSON
-                    JSONObject dato=con.convertirJson(datos.leerUsuario(),"2017-A",actividad);
+                    JSONObject dato=con.convertirJson(datos.leerUsuario(),datos.leerPeriodo(),actividad);
                     //conexion con el servidor
                     url = new URL("https://calius.herokuapp.com/calificaciones");
                     HttpsURLConnection conn=con.con(url);
