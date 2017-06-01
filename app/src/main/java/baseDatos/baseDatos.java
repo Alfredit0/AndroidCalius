@@ -184,6 +184,7 @@ public class baseDatos extends SQLiteOpenHelper {
     }
     public String[] materiasEnVistas(int i,int p) throws UnsupportedEncodingException {
         String[] matCal={null,null};
+        String materia;
         int cont=0;
         SQLiteDatabase db=this.getReadableDatabase();
         Cursor cursor;
@@ -192,6 +193,12 @@ public class baseDatos extends SQLiteOpenHelper {
             cont++;
             if(cont==i){
                 matCal[0]=cursor.getString(0);
+                materia=cursor.getString(0);
+                if(materia.length()<=25){
+                    matCal[0]=materia;
+                }else{
+                    matCal[0]=cortarMateria(materia);
+                }
                 if(p==1){
                     matCal[1]=cursor.getString(1);
                 }else if(p==2){
@@ -205,5 +212,15 @@ public class baseDatos extends SQLiteOpenHelper {
             }
         }
         return matCal;
+    }
+    public String cortarMateria(String materia){
+        String nuevoNombre = materia.charAt(0)+"";
+        for (int x=1; x < materia.length(); x++) {
+            if(Character.isUpperCase(materia.charAt(x))){
+                nuevoNombre=nuevoNombre+materia.charAt(x);
+            }
+
+        }
+        return nuevoNombre;
     }
 }

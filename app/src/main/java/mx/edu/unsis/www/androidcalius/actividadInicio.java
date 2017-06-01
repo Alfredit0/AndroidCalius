@@ -198,6 +198,7 @@ public class actividadInicio extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+
         //creando el contexto
         Context contexto = this;
         //verificacion de la base de datos
@@ -231,7 +232,8 @@ public class actividadInicio extends AppCompatActivity
                 }
             }
             //prueba de que este el usuario
-            Toast.makeText(this, "Ya hay usuario"+datos.leerUsuario()+" Periodo "+datos.leerPeriodo(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Ya hay usuario"+datos.leerUsuario()+" Periodo "+datos.leerPeriodo(), Toast.LENGTH_SHORT).show();setFragmet(new page_one());
+
         }else{
             //En primera instacnia se guarda el usuario
             datos.insertarUsuario(con.getIduser());
@@ -246,10 +248,13 @@ public class actividadInicio extends AppCompatActivity
                 Log.i("Error al obtener datos","");
             }
 
-            Toast.makeText(this, "Peridodo "+datos.leerPeriodo(), Toast.LENGTH_SHORT).show();
-            Toast.makeText(this, "No existe usuario en BD pero el get si "+con.getIduser(), Toast.LENGTH_SHORT).show();
+
+
+            //Toast.makeText(this, "Peridodo "+datos.leerPeriodo(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "No existe usuario en BD pero el get si "+con.getIduser(), Toast.LENGTH_SHORT).show();
         }
         setFragmet(new page_one());
+        //setFragmet(new page_one());
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -301,14 +306,16 @@ public class actividadInicio extends AppCompatActivity
         } else if (id == R.id.nav_sim) {
             setFragmet(new simulador());
         } else if (id == R.id.nav_not) {
-            Toast.makeText(this,"Notificaciones",Toast.LENGTH_SHORT).show();
+            setFragmet(new notificaciones());
         } else if (id == R.id.nav_acd) {
             Toast.makeText(this,"Acerca de",Toast.LENGTH_SHORT).show();
 
         } else if (id == R.id.nav_ces) {
+            //Eliminar base de datos del usuario que cierra sesion
             try {
                 actividadInicio.this.deleteDatabase("calius");
             }catch (Exception e){}
+            //eliminar el indicador de una sesion abierta
             try {
                 File dir = getFilesDir();
                 File file = new File(dir, "sesion.txt");
@@ -321,6 +328,7 @@ public class actividadInicio extends AppCompatActivity
                 Toast.makeText(this,"Cerrar sesión",Toast.LENGTH_SHORT).show();
             }
             //eliminar del sharePreferences el idRegistration
+
         }
 
 

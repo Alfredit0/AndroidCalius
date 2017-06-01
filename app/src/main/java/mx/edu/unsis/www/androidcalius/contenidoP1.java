@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,8 +26,6 @@ public class contenidoP1 extends Fragment {
     //IU de los botones
     private Button p3Mt1,p3Mt2,p3Mt3,p3Mt4,p3Mt5,buttonPromedio;
     baseDatos datos;
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -77,7 +76,6 @@ public class contenidoP1 extends Fragment {
             buttonPromedio=(Button)view.findViewById(R.id.prom);
             buttonPromedio.setText(String.valueOf(promedio).substring(0,3));
         }catch (Exception e){
-
         }
         return view;
     }

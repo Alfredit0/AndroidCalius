@@ -243,6 +243,7 @@ public class actividadAcceso extends AppCompatActivity implements LoaderCallback
                     // servicios GCM
                     regid = gcm.register(SENDER_ID);
                     msg = "Dispositivo registrado, registration ID=" + regid;
+                    System.out.print("Dispositivo registrado, registration ID="+regid);
                     Log.i(TAG, msg);
                     // Una vez se tiene el identificador de registro se manda a
                     // la aplicacion jee
