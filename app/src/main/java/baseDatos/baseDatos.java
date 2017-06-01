@@ -15,6 +15,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 
 import mx.edu.unsis.www.androidcalius.conexion;
 
@@ -106,12 +107,13 @@ public class baseDatos extends SQLiteOpenHelper {
         System.out.println("Antes del for... "+  materia.length());
         //Recorrer el Array
         for( i = 0; i < materia.length(); i++) {
-            System.out.println("Despues del for... " );
             //Creamos el objeto para leer lo que viene en la posición i
             ContentValues valores =new ContentValues();
             JSONObject orden = materia.getJSONObject(i);
             materiaId = orden.getString("idMateria");
             nombreMateria = orden.getString("nombreMateria");
+            System.out.println("Despues del idMateria... "+materiaId );
+            System.out.println("Despues del Materia... " +nombreMateria);
             valores.put("IDMATERIA",materiaId);
             valores.put("MATERIA",nombreMateria);
            this.getWritableDatabase().insert("MATERIAS",null,valores);
@@ -145,12 +147,20 @@ public class baseDatos extends SQLiteOpenHelper {
         }
 
     }
-    public String leerMaterias(int var){
+    public String leerMaterias(int var) throws UnsupportedEncodingException {
         String idMateria=null;
         String calif1=null;
         SQLiteDatabase db=this.getReadableDatabase();
         Cursor cursor;
         cursor=db.query("MATERIAS",new String []{"IDMATERIA","MATERIA","P1","P2","P3","ORD"},"",null,null,null,null);
+        while (cursor.moveToNext()){
+            System.out.println("IDMATERIA " +  cursor.getString(0));
+            System.out.println("MATERIA " +  cursor.getString(1).getBytes());
+            System.out.println("P1 " +  cursor.getString(2).getBytes());
+            System.out.println("P2 " + cursor.getString(3).getBytes());
+            System.out.println("P3 " +  cursor.getString(4).getBytes());
+            System.out.println("ORD " +  cursor.getString(5).getBytes());
+        }
         if(cursor.moveToFirst()){
             if (cursor != null){
                 cursor.moveToFirst();
@@ -172,7 +182,7 @@ public class baseDatos extends SQLiteOpenHelper {
         }
 
     }
-    public String[] materiasEnVistas(int i,int p){
+    public String[] materiasEnVistas(int i,int p) throws UnsupportedEncodingException {
         String[] matCal={null,null};
         int cont=0;
         SQLiteDatabase db=this.getReadableDatabase();

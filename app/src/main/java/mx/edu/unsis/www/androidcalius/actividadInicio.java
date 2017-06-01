@@ -31,6 +31,7 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -209,20 +210,24 @@ public class actividadInicio extends AppCompatActivity
                 obtenerMaterias();
                 obtenerCalificaciones();
             }else{
-                if(datos.leerMaterias(1)==null){
-                    //si falla el pedido de materias en primera intancia
-                    obtenerMaterias();
-                    obtenerCalificaciones();
-                }else{
-                    if(datos.leerMaterias(0)==null){
-                        //si falla el pedido de calificaciones en primera instancia
+                try {
+                    if(datos.leerMaterias(1)==null){
+                        //si falla el pedido de materias en primera intancia
+                        obtenerMaterias();
                         obtenerCalificaciones();
                     }else{
-                        //No hubo nigun fallo pero se tienen que actualizar las calificaciones
-                        datos.leerMaterias(1);
-                        obtenerCalificaciones();
+                        if(datos.leerMaterias(0)==null){
+                            //si falla el pedido de calificaciones en primera instancia
+                            obtenerCalificaciones();
+                        }else{
+                            //No hubo nigun fallo pero se tienen que actualizar las calificaciones
+                            datos.leerMaterias(1);
+                            obtenerCalificaciones();
 
+                        }
                     }
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
                 }
             }
             //prueba de que este el usuario
@@ -244,9 +249,10 @@ public class actividadInicio extends AppCompatActivity
             Toast.makeText(this, "Peridodo "+datos.leerPeriodo(), Toast.LENGTH_SHORT).show();
             Toast.makeText(this, "No existe usuario en BD pero el get si "+con.getIduser(), Toast.LENGTH_SHORT).show();
         }
+        setFragmet(new page_one());
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        setFragmet(new page_one());
+
     }
 
     @Override

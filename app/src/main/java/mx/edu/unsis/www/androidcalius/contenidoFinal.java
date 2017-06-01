@@ -30,19 +30,21 @@ public class contenidoFinal extends Fragment {
         materia4=(TextView)view.findViewById(R.id.materia4);
         materia5=(TextView)view.findViewById(R.id.materia5);
         //recorer la tabla materias de la base de datos
-        datos= new baseDatos(getContext(), "calius",null,1);
-        datos.abrir();
-        String[] matCal;
-        matCal=datos.materiasEnVistas(1,0);
-        materia1.setText(matCal[0]);
-        matCal=datos.materiasEnVistas(2,0);
-        materia2.setText(matCal[0]);
-        matCal=datos.materiasEnVistas(3,0);
-        materia3.setText(matCal[0]);
-        matCal=datos.materiasEnVistas(4,0);
-        materia4.setText(matCal[0]);
-        matCal=datos.materiasEnVistas(5,0);
-        materia5.setText(matCal[0]);
+        try {
+            datos= new baseDatos(getContext(), "calius",null,1);
+            datos.abrir();
+            String[] matCal;
+            matCal=datos.materiasEnVistas(1,0);
+            materia1.setText(matCal[0]);
+            matCal=datos.materiasEnVistas(2,0);
+            materia2.setText(matCal[0]);
+            matCal=datos.materiasEnVistas(3,0);
+            materia3.setText(matCal[0]);
+            matCal=datos.materiasEnVistas(4,0);
+            materia4.setText(matCal[0]);
+            matCal=datos.materiasEnVistas(5,0);
+            materia5.setText(matCal[0]);
+        }catch (Exception e){}
         return  view;
     }
 }

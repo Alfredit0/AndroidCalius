@@ -46,7 +46,7 @@ public class conexion {
     public HttpsURLConnection con(URL url) throws IOException {
         //URL url = new URL("https://calius.herokuapp.com/loginuser");
         HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
-        conn.setRequestProperty("Content-Type", "application/json");
+        conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
         conn.setDoOutput(true);//indica a la conexión que se permite el envío de datos hacia el servidor
         conn.setDoInput(true);
         conn.setRequestMethod("POST");
@@ -91,7 +91,7 @@ public class conexion {
     }
     public JSONObject obtenerRespuesta(HttpsURLConnection conn) throws IOException, JSONException {
         InputStream in = new BufferedInputStream(conn.getInputStream());
-        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(in,"UTF-8"),8);
         StringBuilder result = new StringBuilder();
         String line;
         //obtener el resultado
