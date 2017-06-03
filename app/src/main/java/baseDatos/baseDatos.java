@@ -112,8 +112,8 @@ public class baseDatos extends SQLiteOpenHelper {
             JSONObject orden = materia.getJSONObject(i);
             materiaId = orden.getString("idMateria");
             nombreMateria = orden.getString("nombreMateria");
-            System.out.println("Despues del idMateria... "+materiaId );
-            System.out.println("Despues del Materia... " +nombreMateria);
+            System.out.println("Id de materia del json... "+materiaId );
+            System.out.println("Nombre de materia del json... " +nombreMateria);
             valores.put("IDMATERIA",materiaId);
             valores.put("MATERIA",nombreMateria);
            this.getWritableDatabase().insert("MATERIAS",null,valores);
@@ -154,22 +154,22 @@ public class baseDatos extends SQLiteOpenHelper {
         Cursor cursor;
         cursor=db.query("MATERIAS",new String []{"IDMATERIA","MATERIA","P1","P2","P3","ORD"},"",null,null,null,null);
         while (cursor.moveToNext()){
-            System.out.println("IDMATERIA " +  cursor.getString(0));
-            System.out.println("MATERIA " +  cursor.getString(1).getBytes());
-            System.out.println("P1 " +  cursor.getString(2).getBytes());
-            System.out.println("P2 " + cursor.getString(3).getBytes());
-            System.out.println("P3 " +  cursor.getString(4).getBytes());
-            System.out.println("ORD " +  cursor.getString(5).getBytes());
+            /*System.out.println("IDMATERIA " +  cursor.getString(0));
+            System.out.println("MATERIA " +  cursor.getString(1));
+            System.out.println("P1 " +  cursor.getString(2));
+            System.out.println("P2 " + cursor.getString(3));
+            System.out.println("P3 " +  cursor.getString(4));
+            System.out.println("ORD " +  cursor.getString(5));*/
         }
         if(cursor.moveToFirst()){
             if (cursor != null){
                 cursor.moveToFirst();
-                System.out.println("IDMATERIA " +  cursor.getString(0) );
+                /*System.out.println("IDMATERIA " +  cursor.getString(0) );
                 System.out.println("MATERIA " +  cursor.getString(1) );
                 System.out.println("P1 " +  cursor.getString(2) );
                 System.out.println("P2 " +  cursor.getString(3) );
                 System.out.println("P3 " +  cursor.getString(4) );
-                System.out.println("ORD " +  cursor.getString(5) );
+                System.out.println("ORD " +  cursor.getString(5) );*/
                 idMateria=cursor.getString(0);
                 calif1=cursor.getString(2);
             }
@@ -184,6 +184,7 @@ public class baseDatos extends SQLiteOpenHelper {
     }
     public String[] materiasEnVistas(int i,int p) throws UnsupportedEncodingException {
         String[] matCal={null,null};
+        double cal;
         String materia;
         int cont=0;
         SQLiteDatabase db=this.getReadableDatabase();
@@ -199,14 +200,37 @@ public class baseDatos extends SQLiteOpenHelper {
                 }else{
                     matCal[0]=cortarMateria(materia);
                 }
+                //formato para las aclificaciones
                 if(p==1){
-                    matCal[1]=cursor.getString(1);
+                    cal=cursor.getDouble(1);
+                    if(cal<0){matCal[1]="";}else{matCal[1]=cursor.getString(1);}
+                    //matCal[1]=cursor.getString(1);
                 }else if(p==2){
-                    matCal[1]=cursor.getString(2);
+                    cal=cursor.getDouble(2);
+                    if(cal<0){matCal[1]="";}else{matCal[1]=cursor.getString(2);}
+                    //matCal[1]=cursor.getString(2);
                 }else if(p==3){
-                    matCal[1]=cursor.getString(3);
-                } else{
-                    matCal[1]=cursor.getString(4);
+                    cal=cursor.getDouble(3);
+                    if(cal<0){matCal[1]="";}else{matCal[1]=cursor.getString(3);}
+                    //matCal[1]=cursor.getString(3);
+                } else if(p==4){
+                    cal=cursor.getDouble(4);
+                    if(cal<0){matCal[1]="";}else{matCal[1]=cursor.getString(4);}
+                    //matCal[1]=cursor.getString(4);
+                }else{
+                    //FINAL
+                    double p1,p2,p3,ord,fin;
+                    p1=cursor.getDouble(1);
+                    p2=cursor.getDouble(2);
+                    p3=cursor.getDouble(3);
+                    ord=cursor.getDouble(4);
+                    if(p1<0 || p2<0 || p3<0 || ord<0){
+                        matCal[1]="";
+                    }else{
+                        //calculo de los parciales y ordinario
+                        fin=(((p1+p2+p3)/3)+ord)/2;
+                        matCal[1]=String.valueOf(fin);
+                    }
                 }
                 break;
             }

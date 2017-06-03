@@ -49,6 +49,7 @@ public class GcmIntentService extends IntentService {
      *
      * @param msg mensaje que se muestra en la notificación
      */
+    //guardar el mensaje en base de datos y al cargar  la actividad de notificacioones
     private void sendNotification(String msg) {
         mNotificationManager = (NotificationManager) this
                 .getSystemService(Context.NOTIFICATION_SERVICE);
@@ -61,6 +62,8 @@ public class GcmIntentService extends IntentService {
                 .setContentTitle("Notificacion:" + msg)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
                 .setContentText(msg);
+
+
 
         mBuilder.setContentIntent(contentIntent);
         mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());

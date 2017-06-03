@@ -46,7 +46,8 @@ public class conexion {
     public HttpsURLConnection con(URL url) throws IOException {
         //URL url = new URL("https://calius.herokuapp.com/loginuser");
         HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
-        conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+        conn.setRequestProperty("Content-Type", "application/json");
+        conn.setRequestProperty("accept-Charset","UTF-8");
         conn.setDoOutput(true);//indica a la conexión que se permite el envío de datos hacia el servidor
         conn.setDoInput(true);
         conn.setRequestMethod("POST");

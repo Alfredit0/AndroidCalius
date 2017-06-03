@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="35dp"
                 android:layout_marginLeft="15dp"
-                android:text="Calidad de software"
+
                 android:textSize="18dp"
                 android:textStyle="bold"
                 tools:layout_editor_absoluteX="42dp"
@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="115dp"
                 android:layout_marginLeft="15dp"
-                android:text="Redes"
+
                 android:textSize="18dp"
                 android:textStyle="bold"
                 tools:layout_editor_absoluteX="42dp"
@@ -81,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="195dp"
                 android:layout_marginLeft="15dp"
-                android:text="Sistemas distrubuidos"
+
                 android:textSize="18dp"
                 android:textStyle="bold"
                 tools:layout_editor_absoluteX="42dp"
@@ -109,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="275dp"
                 android:layout_marginLeft="15dp"
-                android:text="Base de datos"
+
                 android:textSize="18dp"
                 android:textStyle="bold"
                 tools:layout_editor_absoluteX="42dp"
@@ -137,7 +137,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="355dp"
                 android:layout_marginLeft="15dp"
-                android:text="Algebra lineal"
+
                 android:textSize="18dp"
                 android:textStyle="bold"
                 tools:layout_editor_absoluteX="42dp"

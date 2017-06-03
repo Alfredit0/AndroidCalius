@@ -4,9 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="mx.edu.unsis.www.androidcalius.actividadInicio"
     tools:showIn="@layout/app_bar_actividad_inicio">
+    <!-- Login progress -->
+    <ProgressBar
+        android:id="@+id/login_progress"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
+        android:visibility="gone"
+        android:layout_gravity="center_vertical|center_horizontal" />
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

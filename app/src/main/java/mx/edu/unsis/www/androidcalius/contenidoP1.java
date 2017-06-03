@@ -32,6 +32,7 @@ public class contenidoP1 extends Fragment {
         view =inflater.inflate(R.layout.fragment_contenido_p1, container, false);
         activity=getActivity();
         double promedio=0.0;
+        boolean bandera=true;
         //Toast.makeText(activity, "Hola contenido parcial 1", Toast.LENGTH_SHORT).show();
         // Inflate the layout for this fragment
         //mandar a llamr los elementos del fragmentos text view y notones
@@ -54,27 +55,36 @@ public class contenidoP1 extends Fragment {
             matCal=datos.materiasEnVistas(1,1);
             materia1.setText(matCal[0]);
             p3Mt1.setText(matCal[1]);
-            promedio=Double.parseDouble(matCal[1])+promedio;
+            if(matCal[1].isEmpty()){bandera=false;}else{promedio=Double.parseDouble(matCal[1])+promedio;}
+
             matCal=datos.materiasEnVistas(2,1);
             materia2.setText(matCal[0]);
             p3Mt2.setText(matCal[1]);
-            promedio=Double.parseDouble(matCal[1])+promedio;
+            if(matCal[1].isEmpty() || !bandera){bandera=false;}else{promedio=Double.parseDouble(matCal[1])+promedio;}
+
             matCal=datos.materiasEnVistas(3,1);
             materia3.setText(matCal[0]);
             p3Mt3.setText(matCal[1]);
-            promedio=Double.parseDouble(matCal[1])+promedio;
+            if(matCal[1].isEmpty() || !bandera){bandera=false;}else{promedio=Double.parseDouble(matCal[1])+promedio;}
+
             matCal=datos.materiasEnVistas(4,1);
             materia4.setText(matCal[0]);
             p3Mt4.setText(matCal[1]);
-            promedio=Double.parseDouble(matCal[1])+promedio;
+            if(matCal[1].isEmpty() || !bandera){bandera=false;}else{promedio=Double.parseDouble(matCal[1])+promedio;}
+
             matCal=datos.materiasEnVistas(5,1);
             materia5.setText(matCal[0]);
             p3Mt5.setText(matCal[1]);
-            promedio=Double.parseDouble(matCal[1])+promedio;
-            promedio=promedio/5;
-            //para promedio tengo que sumar
+            if(matCal[1].isEmpty() || !bandera){bandera=false;}else{promedio=Double.parseDouble(matCal[1])+promedio;}
+
             buttonPromedio=(Button)view.findViewById(R.id.prom);
-            buttonPromedio.setText(String.valueOf(promedio).substring(0,3));
+            if(bandera){
+                promedio=promedio/5;
+                //para promedio tengo que sumar
+                buttonPromedio.setText(String.valueOf(promedio).substring(0,3));
+            }else{
+                buttonPromedio.setText("");
+            }
         }catch (Exception e){
         }
         return view;

@@ -52,7 +52,6 @@ public class contenidoP1Simul extends Fragment  {
                 try {
                     matCal=datos.materiasEnVistas(1,1);
                     materia1.setText(matCal[0]);
-                    //haer un cast y comparar si es menor de cero mandar un vacio. Edit text habilitado. De lo contrario deshabilitar en editText
                     p3Mt1.setText(matCal[1]);
 
                     matCal=datos.materiasEnVistas(2,1);
