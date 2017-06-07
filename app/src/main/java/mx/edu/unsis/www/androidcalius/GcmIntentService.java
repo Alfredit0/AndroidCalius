@@ -9,6 +9,14 @@ import android.os.Bundle;
 import android.support.v7.app.NotificationCompat;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import baseDatos.baseDatos;
 
 /**
  * Created by Elvia on 24/05/2017.
@@ -18,7 +26,7 @@ public class GcmIntentService extends IntentService {
     public static final int NOTIFICATION_ID = 1;
     private NotificationManager mNotificationManager;
     NotificationCompat.Builder builder;
-
+    baseDatos datos;
     public GcmIntentService() {
         super("GcmIntentService");
     }
@@ -36,7 +44,11 @@ public class GcmIntentService extends IntentService {
         if (!extras.isEmpty()) {
             if (GoogleCloudMessaging.MESSAGE_TYPE_MESSAGE.equals(messageType)) {
                 //Se visualiza el mendaje en la barra de notificaciones
-                sendNotification(extras.getString("mensaje"));
+                try {
+                    sendNotification(extras.getString("mensaje"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }
 
@@ -49,8 +61,8 @@ public class GcmIntentService extends IntentService {
      *
      * @param msg mensaje que se muestra en la notificación
      */
-    //guardar el mensaje en base de datos y al cargar  la actividad de notificacioones
-    private void sendNotification(String msg) {
+    private void sendNotification(String msg) throws JSONException {
+
         mNotificationManager = (NotificationManager) this
                 .getSystemService(Context.NOTIFICATION_SERVICE);
 
@@ -62,7 +74,10 @@ public class GcmIntentService extends IntentService {
                 .setContentTitle("Notificacion:" + msg)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
                 .setContentText(msg);
-
+        JSONObject json = new JSONObject(msg);
+        //guadar los datos del json en base de datos
+        datos= new baseDatos(this, "calius",null,1);
+        datos.guardarNotificaciones(json);
 
 
         mBuilder.setContentIntent(contentIntent);

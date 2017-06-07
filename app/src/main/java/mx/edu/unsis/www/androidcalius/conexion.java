@@ -27,6 +27,7 @@ import javax.net.ssl.HttpsURLConnection;
 public class conexion {
     private static String passcon="12345";
     private static String iduser="";
+    private static int idNotificacion;
 
     /**Para comprovar si hay acceso a internet*/
     public Boolean isOnlineNet() {
@@ -47,7 +48,7 @@ public class conexion {
         //URL url = new URL("https://calius.herokuapp.com/loginuser");
         HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
         conn.setRequestProperty("Content-Type", "application/json");
-        conn.setRequestProperty("accept-Charset","UTF-8");
+        conn.setRequestProperty("Accept-Charset","UTF-8");
         conn.setDoOutput(true);//indica a la conexión que se permite el envío de datos hacia el servidor
         conn.setDoInput(true);
         conn.setRequestMethod("POST");
@@ -92,7 +93,7 @@ public class conexion {
     }
     public JSONObject obtenerRespuesta(HttpsURLConnection conn) throws IOException, JSONException {
         InputStream in = new BufferedInputStream(conn.getInputStream());
-        BufferedReader reader = new BufferedReader(new InputStreamReader(in,"UTF-8"),8);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(in,"UTF-8"));
         StringBuilder result = new StringBuilder();
         String line;
         //obtener el resultado
@@ -105,7 +106,7 @@ public class conexion {
     }
 
 
-    //metodos para la comparticion de la valiable iduser
+    //metodos para la comparticion de la valiable iduser y id de la motificacion de la cual se quiere ver el mensaje
     public static String getIduser() {
         return iduser;
     }
@@ -114,6 +115,13 @@ public class conexion {
         conexion.iduser = iduser;
     }
 
+    public static int getIdNotificacion() {
+        return idNotificacion;
+    }
+
+    public static void setIdNotificacion(int idNotificacion) {
+        conexion.idNotificacion = idNotificacion;
+    }
 
     public String getMD5(String cadena) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("MD5");

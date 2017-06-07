@@ -16,6 +16,9 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 import mx.edu.unsis.www.androidcalius.conexion;
 
@@ -27,6 +30,7 @@ public class baseDatos extends SQLiteOpenHelper {
     //creacion de la base de datos
     private static final String SQL = "create table USUARIO (MATRICULA TEXT PRIMARY KEY,PERIODO TEXT);";
     private static final String SQL2 = "create table MATERIAS (IDMATERIA TEXT PRIMARY KEY,MATERIA TEXT,P1 REAL,P2 REAL, P3 REAL, ORD REAL);";
+    private static final String SQL3 = "create table NOTIFICACIONES(ID INTEGER PRIMARY KEY AUTOINCREMENT,IDSERVIDOR TEXT, REMITENTE TEXT,DESTINATARIO TEXT,MENSAJE TEXT,FECHA TEXT,ASUNTO TEXT);";
     public baseDatos(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
@@ -34,6 +38,7 @@ public class baseDatos extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL);
         db.execSQL(SQL2);
+        db.execSQL(SQL3);
     }
 
     @Override
@@ -88,13 +93,6 @@ public class baseDatos extends SQLiteOpenHelper {
         System.out.print("el periodo es "+periodo);
         return periodo;
     }
-
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-    public Boolean eliminarDB(){
-        return SQLiteDatabase.deleteDatabase(new File("/data/data/mx.edu.unsis.www.androidcalius/databases/calius.db"));
-    }
-
-
     public void guardarMaterias(JSONObject materias) throws JSONException {
         //System.out.println("En guardar materias... " );
         //recorrer el json con un for e irlas inseratndo hasta que se leea todp
@@ -246,5 +244,71 @@ public class baseDatos extends SQLiteOpenHelper {
 
         }
         return nuevoNombre;
+    }
+    public void guardarNotificaciones(JSONObject json) throws JSONException {
+        Date date=new Date();
+        SimpleDateFormat fecc=new SimpleDateFormat("dd/MM/yyyy");
+        String fecha = fecc.format(date);
+        //IDSERVIDOR TEXT, REMITENTE TEXT,DESTINATARIO TEXT,MENSAJE TEXT,FECHA TEXT,ASUNTO TEXT
+        ContentValues valores =new ContentValues();
+        valores.put("IDSERVIDOR",json.getString("id"));
+        System.out.print(json.getString("id"));
+        valores.put("REMITENTE",json.getString("remitente"));
+        System.out.print(json.getString("remitente"));
+        valores.put("DESTINATARIO",json.getString("destinatario"));
+        System.out.print(json.getString("destinatario"));
+        valores.put("MENSAJE",json.getString("mensaje"));
+        System.out.print(json.getString("mensaje"));
+        valores.put("FECHA",json.getString("fecha"));
+        System.out.print(json.getString("fecha"));
+        valores.put("ASUNTO",json.getString("asunto"));
+        System.out.print(json.getString("asunto"));
+        this.getWritableDatabase().insert("NOTIFICACIONES",null,valores);
+
+    }
+
+    public ArrayList<String> leerNotificaciones(int a){
+        ArrayList<String> Asuntos=new ArrayList<>();
+        ArrayList<String> destinatario=new ArrayList<>();
+        ArrayList<String> fecha=new ArrayList<>();
+        int i=0;
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cursor;
+        String id="ID";
+        cursor=db.query("NOTIFICACIONES",new String []{"ID","IDSERVIDOR","REMITENTE","DESTINATARIO","MENSAJE","FECHA","ASUNTO"},null,null,null,null,id+" DESC");
+        while (cursor.moveToNext()){
+            System.out.println("ID " +  cursor.getString(0));
+            System.out.println("IDSERVIDOR " +  cursor.getString(1));
+            System.out.println("REMITENTE " +  cursor.getString(2));
+            System.out.println("DESTINATARIO " +  cursor.getString(3));
+            System.out.println("MENSAJE " + cursor.getString(4));
+            System.out.println("FECHA " +  cursor.getString(5));
+            System.out.println("ASUNTO " +  cursor.getString(6));
+            destinatario.add(cursor.getString(3));
+            fecha.add(cursor.getString(5));
+            Asuntos.add(cursor.getString(6));
+            i++;
+        }
+        if (a==1){
+            return Asuntos;
+        }else if(a==2){
+            return destinatario;
+        }else{
+            return fecha;
+        }
+
+    }
+    public String[] leerMensajeRemitente(int id) {
+        String[] mensajeRemitente = {null, null};
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor;
+        cursor = db.query("NOTIFICACIONES", new String[]{"REMITENTE", "MENSAJE"}, "ID = " + id, null, null, null, null);
+        if (cursor.moveToFirst()) {
+            if (cursor != null) {
+                mensajeRemitente[0] = cursor.getString(0);
+                mensajeRemitente[1] = cursor.getString(1);
+            }
+        }
+        return mensajeRemitente;
     }
 }

@@ -161,6 +161,9 @@ public class actividadInicio extends AppCompatActivity
 
         new AsyncTask<Object, Object, Object>() {
             @Override
+            protected void onCancelled() {showProgress(false);}
+
+            @Override
             protected void onPostExecute(final Object result) {
                 showProgress(false);
             }
@@ -314,6 +317,7 @@ public class actividadInicio extends AppCompatActivity
             //Toast.makeText(this, "Peridodo "+datos.leerPeriodo(), Toast.LENGTH_SHORT).show();
             //Toast.makeText(this, "No existe usuario en BD pero el get si "+con.getIduser(), Toast.LENGTH_SHORT).show();
         }
+
         setFragmet(new page_one());
         //setFragmet(new page_one());
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
