@@ -98,7 +98,7 @@ public class contenidoFinalSimul extends Fragment {
         double sumaCalif=0.0;
         int mostrar=0;
         double promedioFinal=0.0;
-
+        int totalMate=0;
         try{
             parMat1=calFinal.getP1Materia1();
             parMat2=calFinal.getP2Materia1();
@@ -110,6 +110,7 @@ public class contenidoFinalSimul extends Fragment {
             mostrar=ValidarCajas(parMat1,parMat2,parMat3,ord);
             if(mostrar==1) {
                 Mt1.setText(String.valueOf(prom));
+                totalMate=totalMate+1;
             }else {
                 Mt1.setText("");
             }
@@ -124,6 +125,7 @@ public class contenidoFinalSimul extends Fragment {
             mostrar=ValidarCajas(parMat1,parMat2,parMat3,ord);
             if(mostrar==1){
                 Mt2.setText(String.valueOf(prom));
+                totalMate=totalMate+1;
             }else {
                 Mt2.setText("");
             }
@@ -139,6 +141,7 @@ public class contenidoFinalSimul extends Fragment {
             mostrar=ValidarCajas(parMat1,parMat2,parMat3,ord);
             if(mostrar==1){
                 Mt3.setText(String.valueOf(prom));
+                totalMate=totalMate+1;
             }else {
                 Mt3.setText("");
             }
@@ -154,6 +157,7 @@ public class contenidoFinalSimul extends Fragment {
             mostrar=ValidarCajas(parMat1,parMat2,parMat3,ord);
             if(mostrar==1){
                 Mt4.setText(String.valueOf(prom));
+                totalMate=totalMate+1;
             }else {
                 Mt4.setText("");
             }
@@ -169,6 +173,7 @@ public class contenidoFinalSimul extends Fragment {
             mostrar=ValidarCajas(parMat1,parMat2,parMat3,ord);
             if(mostrar==1){
                 Mt5.setText(String.valueOf(prom));
+                totalMate=totalMate+1;
             }else {
                 Mt5.setText("");
             }
@@ -176,6 +181,13 @@ public class contenidoFinalSimul extends Fragment {
             //Calcular el promedio final
             promedioFinal=sumaCalif/5;
             promedio.setText(String.valueOf(promedioFinal));
+
+            if(totalMate==5){
+                promedio.setText(String.valueOf(promedioFinal));
+            }else
+            {
+                promedio.setText("");
+            }
         } catch (Exception nfe) {
             System.out.println("Error en contenidoFinalSimul... " + nfe);
         }

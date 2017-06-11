@@ -168,6 +168,11 @@ public class contenidoOrdSimul extends Fragment {
             {
             }else {
                 materia1or=Double.parseDouble(orMt1.getText().toString());
+                if(ord.validarCali(materia1or)==1)
+                {
+                    orMt1.setText("");
+                    materia1or=-1.0;
+                }else
                 totalMate = totalMate + 1;
             }
 
@@ -176,6 +181,11 @@ public class contenidoOrdSimul extends Fragment {
             {
             }else {
                 materia2or=Double.parseDouble(orMt2.getText().toString());
+                if (ord.validarCali(materia2or)==1)
+                {
+                    orMt2.setText("");
+                    materia2or=-1.0;
+                }else
                 totalMate = totalMate + 1;
             }
 
@@ -183,6 +193,11 @@ public class contenidoOrdSimul extends Fragment {
             if(aux.equals("")){
             }else {
                 materia3or=Double.parseDouble(orMt3.getText().toString());
+                if(ord.validarCali(materia3or)==1)
+                {
+                    orMt3.setText("");
+                    materia3or=-1.0;
+                }else
                 totalMate = totalMate + 1;
             }
 
@@ -190,6 +205,11 @@ public class contenidoOrdSimul extends Fragment {
             if (aux.equals("")){
             }else {
                 materia4or=Double.parseDouble(orMt4.getText().toString());
+                if (ord.validarCali(materia4or)==1)
+                {
+                    orMt4.setText("");
+                    materia4or=-1.0;
+                }else
                 totalMate = totalMate + 1;
             }
 
@@ -198,6 +218,11 @@ public class contenidoOrdSimul extends Fragment {
             {
             }else {
                 materia5or=Double.parseDouble(orMt5.getText().toString());
+                if (ord.validarCali(materia5or)==1)
+                {
+                    orMt5.setText("");
+                    materia5or=-1.0;
+                }else
                 totalMate = totalMate + 1;
             }
             ord.setOrMateria1(materia1or);
@@ -216,6 +241,11 @@ public class contenidoOrdSimul extends Fragment {
         } else {
             promedioparcial = sumaCalif / totalMate;
         }
-        promedio.setText(String.valueOf(promedioparcial));
+        if(totalMate==5){
+            promedio.setText(String.valueOf(promedioparcial));
+        }else
+        {
+            promedio.setText("");
+        }
     }
 }

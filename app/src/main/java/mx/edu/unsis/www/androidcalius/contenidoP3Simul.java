@@ -166,6 +166,10 @@ public class contenidoP3Simul extends Fragment {
             {
             }else {
                 materia1P3=Double.parseDouble(p3Mt1.getText().toString());
+                if (par3.validarCali(materia1P3)==1){
+                    p3Mt1.setText("");
+                    materia1P3=-1.0;
+                }else
                 totalMate = totalMate + 1;
             }
 
@@ -174,6 +178,11 @@ public class contenidoP3Simul extends Fragment {
             {
             }else {
                 materia2P3=Double.parseDouble(p3Mt2.getText().toString());
+                if (par3.validarCali(materia2P3)==1)
+                {
+                    p3Mt2.setText("");
+                    materia2P3=-1.0;
+                }else
                 totalMate = totalMate + 1;
             }
 
@@ -181,6 +190,11 @@ public class contenidoP3Simul extends Fragment {
             if(aux.equals("")){
             }else {
                 materia3P3=Double.parseDouble(p3Mt3.getText().toString());
+                if (par3.validarCali(materia3P3)==1)
+                {
+                    p3Mt3.setText("");
+                    materia3P3=-1.0;
+                }else
                 totalMate = totalMate + 1;
             }
 
@@ -188,6 +202,11 @@ public class contenidoP3Simul extends Fragment {
             if (aux.equals("")){
             }else {
                 materia4P3=Double.parseDouble(p3Mt4.getText().toString());
+                if(par3.validarCali(materia4P3)==1)
+                {
+                    p3Mt4.setText("");
+                    materia4P3=-1.0;
+                }else
                 totalMate = totalMate + 1;
             }
 
@@ -196,6 +215,11 @@ public class contenidoP3Simul extends Fragment {
             {
             }else {
                 materia5P3=Double.parseDouble(p3Mt5.getText().toString());
+                if (par3.validarCali(materia5P3)==1)
+                {
+                    p3Mt5.setText("");
+                    materia5P3=-1.0;
+                }else
                 totalMate = totalMate + 1;
             }
             par3.setP3Materia1(materia1P3);
@@ -214,7 +238,12 @@ public class contenidoP3Simul extends Fragment {
         } else {
             promedioparcial = sumaCalif / totalMate;
         }
-        promedio.setText(String.valueOf(promedioparcial));
+        if(totalMate==5){
+            promedio.setText(String.valueOf(promedioparcial));
+        }else
+        {
+            promedio.setText("");
+        }
     }
 
 }

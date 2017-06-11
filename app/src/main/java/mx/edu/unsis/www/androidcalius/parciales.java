@@ -239,4 +239,12 @@ public class parciales {
     }
 
 
+    int validarCali(double calif) {
+        if(calif>10 || calif <0)
+        {
+            return 1;
+        }else
+            return -1;
+    }
+
 }

@@ -1,6 +1,8 @@
 package mx.edu.unsis.www.androidcalius;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -168,6 +170,7 @@ public class contenidoP1Simul extends Fragment  {
         double materia4P1 = -1.0;
         double materia5P1 = -1.0;
         int totalMate = 0;
+        int califValido;
         double sumaCalif = 0;
         double promedioparcial = 0;
         String aux="";
@@ -178,6 +181,12 @@ public class contenidoP1Simul extends Fragment  {
             {
             }else {
                 materia1P1=Double.parseDouble(p1Mt1.getText().toString());
+                //validarCali(materia1P1,p1Mt1);
+                if(par1.validarCali(materia1P1)==1)
+                {
+                    p1Mt1.setText("");
+                    materia1P1=-1;
+                }else
                 totalMate = totalMate + 1;
             }
 
@@ -186,6 +195,11 @@ public class contenidoP1Simul extends Fragment  {
             {
             }else {
                 materia2P1=Double.parseDouble(p1Mt2.getText().toString());
+                if(par1.validarCali(materia2P1)==1)
+                {
+                    p1Mt2.setText("");
+                    materia2P1=-1;
+                }else
                 totalMate = totalMate + 1;
             }
 
@@ -193,6 +207,11 @@ public class contenidoP1Simul extends Fragment  {
             if(aux.equals("")){
             }else {
                 materia3P1=Double.parseDouble(p1Mt3.getText().toString());
+                if(par1.validarCali(materia3P1)==1)
+                {
+                    p1Mt3.setText("");
+                    materia3P1=-1;
+                }else
                 totalMate = totalMate + 1;
             }
 
@@ -200,6 +219,11 @@ public class contenidoP1Simul extends Fragment  {
             if (aux.equals("")){
             }else {
                 materia4P1=Double.parseDouble(p1Mt4.getText().toString());
+                if(par1.validarCali(materia4P1)==1)
+                {
+                    p1Mt4.setText("");
+                    materia4P1=-1;
+                }else
                 totalMate = totalMate + 1;
             }
 
@@ -208,6 +232,11 @@ public class contenidoP1Simul extends Fragment  {
             {
             }else {
                 materia5P1=Double.parseDouble(p1Mt5.getText().toString());
+                if(par1.validarCali(materia5P1)==1)
+                {
+                    p1Mt5.setText("");
+                    materia1P1=-1;
+                }else
                 totalMate = totalMate + 1;
             }
             par1.setP1Materia1(materia1P1);
@@ -215,7 +244,6 @@ public class contenidoP1Simul extends Fragment  {
             par1.setP1Materia3(materia3P1);
             par1.setP1Materia4(materia4P1);
             par1.setP1Materia5(materia5P1);
-
 
         } catch (NumberFormatException nfe) {
             System.out.println("Error de contenido P1 sumulador  " + nfe);
@@ -227,8 +255,14 @@ public class contenidoP1Simul extends Fragment  {
         } else {
             promedioparcial = sumaCalif / totalMate;
         }
-        promedio.setText(String.valueOf(promedioparcial));
+        if(totalMate==5){
+            promedio.setText(String.valueOf(promedioparcial));
+        }else
+        {
+            promedio.setText("");
+        }
     }
+
 
 
 
