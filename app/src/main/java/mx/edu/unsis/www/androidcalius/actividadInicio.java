@@ -374,7 +374,6 @@ public class actividadInicio extends AppCompatActivity
             setFragmet(new notificaciones());
         } else if (id == R.id.nav_acd) {
             Toast.makeText(this,"Acerca de",Toast.LENGTH_SHORT).show();
-
         } else if (id == R.id.nav_ces) {
             //Eliminar base de datos del usuario que cierra sesion
             try {
