@@ -6,6 +6,8 @@ package mx.edu.unsis.www.androidcalius;
 
 public class parciales {
     public parciales(){};
+    //Guardara la posicion donde se encuentra el usuario
+   static private String posicion;
     static private Double p1Materia1;
     static private Double p1Materia2;
     static private Double p1Materia3;
@@ -35,6 +37,8 @@ public class parciales {
     static private boolean Materia3;
     static private boolean Materia4;
     static private boolean Materia5;
+
+
 
     public  boolean isMateria1() {
         return Materia1;
@@ -238,6 +242,13 @@ public class parciales {
         this.orMateria5 = orMateria5;
     }
 
+    public String getPosicion() {
+        return posicion;
+    }
+
+    public void setPosicion(String posicion) {
+        this.posicion = posicion;
+    }
 
     int validarCali(double calif) {
         if(calif>10 || calif <0)
@@ -246,5 +257,4 @@ public class parciales {
         }else
             return -1;
     }
-
 }

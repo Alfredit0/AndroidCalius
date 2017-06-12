@@ -37,6 +37,8 @@ public class contenidoP1Simul extends Fragment  {
                 // Inflate the layout for this fragment
                 View view = inflater.inflate(R.layout.fragment_contenido_p1_simul,
                         container, false);
+                // Guardando la la posicion de la aplicacion
+                par1.setPosicion("simulador");
                 //mandar a llamr los elementos del fragmentos text view y notones
                 materia1=(TextView)view.findViewById(R.id.materia1);
                 materia2=(TextView)view.findViewById(R.id.materia2);
