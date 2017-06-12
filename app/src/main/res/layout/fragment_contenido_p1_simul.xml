@@ -147,7 +147,7 @@
             android:layout_height="60dp"
             android:layout_alignParentRight="true"
             android:layout_marginTop="330dp"
-            android:background="@drawable/boton_rojo"
+            android:background="@drawable/boton_azulclaro"
             android:inputType="numberDecimal"
             android:maxLength="4"
             android:selectAllOnFocus="true"
@@ -168,7 +168,7 @@
             tools:layout_editor_absoluteY="101dp" />
 
         <EditText
-            android:id="@+id/calif6"
+            android:id="@+id/prom"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_alignParentRight="true"
@@ -180,7 +180,8 @@
             android:text="@string/palabra"
             android:textColor="@color/texto"
             android:textSize="20dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:enabled="false"/>
 
 
     </RelativeLayout>

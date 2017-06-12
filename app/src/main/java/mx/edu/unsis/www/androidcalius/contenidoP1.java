@@ -26,6 +26,7 @@ public class contenidoP1 extends Fragment {
     //IU de los botones
     private Button p3Mt1,p3Mt2,p3Mt3,p3Mt4,p3Mt5,buttonPromedio;
     baseDatos datos;
+    parciales posicion=new parciales();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -33,6 +34,8 @@ public class contenidoP1 extends Fragment {
         activity=getActivity();
         double promedio=0.0;
         boolean bandera=true;
+        //Guardando la posicion de la aplicacion
+        posicion.setPosicion("contenido");
         //Toast.makeText(activity, "Hola contenido parcial 1", Toast.LENGTH_SHORT).show();
         // Inflate the layout for this fragment
         //mandar a llamr los elementos del fragmentos text view y notones

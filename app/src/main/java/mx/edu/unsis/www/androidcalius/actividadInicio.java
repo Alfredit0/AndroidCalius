@@ -23,18 +23,15 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
-
-import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -48,6 +45,9 @@ import static mx.edu.unsis.www.androidcalius.R.id.drawer_layout;
 
 public class actividadInicio extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    // instanciando parciales para obtener la posicion de la aplicacion en ejecucion
+    parciales posicion=new parciales();
+   guardarContednidoSimulador guardarSimul=new guardarContednidoSimulador();
     ViewPager mViewPager;
     conexion con=new conexion();
     baseDatos datos;
@@ -55,6 +55,8 @@ public class actividadInicio extends AppCompatActivity
     private String Database_path="/data/data/mx.edu.unsis.www.androidcalius/databases/calius.db";
     private View mProgressView;
     private View mLoginFormView;
+    private EditText gurdar;
+
 
     //metodos para obtener el periodo
     private void obtenerPeriodo() {
@@ -263,6 +265,8 @@ public class actividadInicio extends AppCompatActivity
 
         mLoginFormView = findViewById(R.id.content_main);
         mProgressView = findViewById(R.id.login_progress);
+
+
         //creando el contexto
         Context contexto = this;
         //verificacion de la base de datos
@@ -351,6 +355,9 @@ public class actividadInicio extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            if(posicion.getPosicion().equals("simulador")) {
+                Toast.makeText(this, "Los datos del simulador  se estan guardando ", Toast.LENGTH_SHORT).show();
+            }
             return true;
         }
 

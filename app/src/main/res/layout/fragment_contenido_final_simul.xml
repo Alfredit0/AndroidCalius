@@ -41,14 +41,15 @@
                 android:layout_height="60dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/boton_rojo"
+                android:background="@drawable/boton_azulclaro"
                 android:inputType="numberDecimal"
                 android:maxLength="4"
                 android:selectAllOnFocus="true"
                 android:text="@string/palabra"
                 android:textColor="@color/texto"
                 android:textSize="20dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:enabled="false"/>
 
             <TextView
                 android:id="@+id/materia2"
@@ -68,14 +69,15 @@
                 android:layout_height="60dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="90dp"
-                android:background="@drawable/boton_rojo"
+                android:background="@drawable/boton_azulclaro"
                 android:inputType="numberDecimal"
                 android:maxLength="4"
                 android:selectAllOnFocus="true"
                 android:text="@string/palabra"
                 android:textColor="@color/texto"
                 android:textSize="20dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:enabled="false"/>
 
             <TextView
                 android:id="@+id/materia3"
@@ -102,7 +104,8 @@
                 android:text="@string/palabra"
                 android:textColor="@color/texto"
                 android:textSize="20dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:enabled="false"/>
             <TextView
                 android:id="@+id/materia4"
                 android:layout_width="wrap_content"
@@ -121,14 +124,15 @@
                 android:layout_height="60dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="250dp"
-                android:background="@drawable/boton_azul"
+                android:background="@drawable/boton_azulclaro"
                 android:inputType="numberDecimal"
                 android:maxLength="4"
                 android:selectAllOnFocus="true"
                 android:text="@string/palabra"
                 android:textColor="@color/texto"
                 android:textSize="20dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:enabled="false"/>
             <TextView
                 android:id="@+id/materia5"
                 android:layout_width="wrap_content"
@@ -147,14 +151,15 @@
                 android:layout_height="60dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="330dp"
-                android:background="@drawable/boton_rojo"
+                android:background="@drawable/boton_azulclaro"
                 android:inputType="numberDecimal"
                 android:maxLength="4"
                 android:selectAllOnFocus="true"
                 android:text="@string/palabra"
                 android:textColor="@color/texto"
                 android:textSize="20dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:enabled="false"/>
             <TextView
                 android:id="@+id/promedio"
                 android:layout_width="wrap_content"
@@ -168,11 +173,26 @@
                 tools:layout_editor_absoluteY="101dp" />
 
             <EditText
-                android:id="@+id/calif6"
+                android:id="@+id/promedioFin"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="400dp"
+                android:background="@drawable/boton_azul"
+                android:inputType="numberDecimal"
+                android:maxLength="4"
+                android:selectAllOnFocus="true"
+                android:text="@string/palabra"
+                android:textColor="@color/texto"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:enabled="false"/>
+            <EditText
+                android:id="@+id/prom"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="420dp"
                 android:background="@drawable/boton_rojo"
                 android:inputType="numberDecimal"
                 android:maxLength="4"
@@ -180,7 +200,8 @@
                 android:text="@string/palabra"
                 android:textColor="@color/texto"
                 android:textSize="20dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="invisible"/>
 
 
         </RelativeLayout>

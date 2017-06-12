@@ -2,6 +2,8 @@ package mx.edu.unsis.www.androidcalius;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +17,9 @@ public class contenidoP3Simul extends Fragment {
     //IU de los textView
     private TextView materia1, materia2, materia3, materia4, materia5;
     //IU de los botones
-    private EditText p3Mt1,p3Mt2,p3Mt3,p3Mt4,p3Mt5,buttonPromedio;
+    private EditText p3Mt1,p3Mt2,p3Mt3,p3Mt4,p3Mt5,promedio;
     baseDatos datos;
+    parciales par3=new parciales();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -34,6 +37,7 @@ public class contenidoP3Simul extends Fragment {
         p3Mt3=(EditText)view.findViewById(R.id.calif3);
         p3Mt4=(EditText)view.findViewById(R.id.calif4);
         p3Mt5=(EditText)view.findViewById(R.id.calif5);
+        promedio=(EditText)view.findViewById(R.id.prom);
 
         //recorer la tabla materias de la base de datos
         datos= new baseDatos(getContext(), "calius",null,1);
@@ -61,9 +65,218 @@ public class contenidoP3Simul extends Fragment {
             p3Mt5.setText(matCal[1]);
 
         }catch (Exception e){}
+        obtenerdatos();
+        p3Mt1.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                obtenerdatos();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        p3Mt2.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                obtenerdatos();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        p3Mt3.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                obtenerdatos();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        p3Mt4.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                obtenerdatos();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        p3Mt5.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                obtenerdatos();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         return view;
     }
 
+    public void obtenerdatos() {
+        double materia1P3 = -1.0;
+        double materia2P3 = -1.0;
+        double materia3P3 = -1.0;
+        double materia4P3 = -1.0;
+        double materia5P3 = -1.0;
+        int totalMate = 0;
+        double sumaCalif = 0;
+        double promedioparcial = 0;
+        String aux="";
 
+        try {
+            aux=p3Mt1.getText().toString();
+            if(aux.equals(""))
+            {
+                p3Mt1.setBackgroundResource(R.drawable.boton_azulclaro);
+            }else {
+                materia1P3=Double.parseDouble(p3Mt1.getText().toString());
+                if (par3.validarCali(materia1P3)==1){
+                    p3Mt1.setText("");
+                    materia1P3=-1.0;
+                    p3Mt1.setBackgroundResource(R.drawable.boton_azulclaro);
+                }else {
+                    totalMate = totalMate + 1;
+                    asignarColor(materia1P3,p3Mt1);
+                }
+            }
+
+            aux=p3Mt2.getText().toString();
+            if(aux.equals(""))
+            {
+                p3Mt2.setBackgroundResource(R.drawable.boton_azulclaro);
+            }else {
+                materia2P3=Double.parseDouble(p3Mt2.getText().toString());
+                if (par3.validarCali(materia2P3)==1)
+                {
+                    p3Mt2.setText("");
+                    materia2P3=-1.0;
+                    p3Mt2.setBackgroundResource(R.drawable.boton_azulclaro);
+                }else {
+                    totalMate = totalMate + 1;
+                    asignarColor(materia2P3,p3Mt2);
+                }
+            }
+
+            aux=p3Mt3.getText().toString();
+            if(aux.equals("")){
+                p3Mt3.setBackgroundResource(R.drawable.boton_azulclaro);
+            }else {
+                materia3P3=Double.parseDouble(p3Mt3.getText().toString());
+                if (par3.validarCali(materia3P3)==1)
+                {
+                    p3Mt3.setText("");
+                    materia3P3=-1.0;
+                    p3Mt3.setBackgroundResource(R.drawable.boton_azulclaro);
+                }else {
+                    totalMate = totalMate + 1;
+                    asignarColor(materia3P3,p3Mt3);
+                }
+            }
+
+            aux=p3Mt4.getText().toString();
+            if (aux.equals("")){
+                p3Mt4.setBackgroundResource(R.drawable.boton_azulclaro);
+            }else {
+                materia4P3=Double.parseDouble(p3Mt4.getText().toString());
+                if(par3.validarCali(materia4P3)==1)
+                {
+                    p3Mt4.setText("");
+                    materia4P3=-1.0;
+                    p3Mt4.setBackgroundResource(R.drawable.boton_azulclaro);
+                }else {
+                    totalMate = totalMate + 1;
+                    asignarColor(materia4P3,p3Mt4);
+                }
+            }
+
+            aux=p3Mt5.getText().toString();
+            if(aux.equals(""))
+            {
+                p3Mt5.setBackgroundResource(R.drawable.boton_azulclaro);
+            }else {
+                materia5P3=Double.parseDouble(p3Mt5.getText().toString());
+                if (par3.validarCali(materia5P3)==1)
+                {
+                    p3Mt5.setText("");
+                    materia5P3=-1.0;
+                    p3Mt5.setBackgroundResource(R.drawable.boton_azulclaro);
+                }else {
+                    totalMate = totalMate + 1;
+                    asignarColor(materia5P3,p3Mt5);
+                }
+            }
+            par3.setP3Materia1(materia1P3);
+            par3.setP3Materia2(materia2P3);
+            par3.setP3Materia3(materia3P3);
+            par3.setP3Materia4(materia4P3);
+            par3.setP3Materia5(materia5P3);
+
+        } catch (NumberFormatException nfe) {
+            System.out.println("Guardadndo calificaciones... " + nfe);
+        }
+
+        sumaCalif = materia1P3 + materia2P3 + materia3P3 + materia4P3 + materia5P3;
+        if (totalMate == 0) {
+            promedioparcial = 0.0;
+        } else {
+            promedioparcial = sumaCalif / totalMate;
+        }
+        if(totalMate==5){//Si ya estan todas las calificaciònes se imprime el promedio final
+            promedio.setText(String.valueOf(promedioparcial).substring(0,3));
+            if (promedioparcial<6){//Seleccionando color para las cajas de texto
+                promedio.setBackgroundResource(R.drawable.boton_rojo);
+            }else {
+                promedio.setBackgroundResource(R.drawable.boton_azul);
+            }
+        }else
+        {//Si se borra la calificacion de alguna caja se queda vacìo la caja del promedio final y se regresa a su color de inicio
+            promedio.setText("");
+            promedio.setBackgroundResource(R.drawable.boton_azul);
+        }
+    }
+    //Procedimiento para asignar color a las cajas de texto
+    private void asignarColor(double calif, EditText caja) {
+        if(calif<6.0){
+            caja.setBackgroundResource(R.drawable.boton_rojo);
+        }else {
+            caja.setBackgroundResource(R.drawable.boton_azulclaro);
+        }
+    }
 }
