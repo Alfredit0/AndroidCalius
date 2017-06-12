@@ -109,10 +109,12 @@ public class contenidoFinalSimul extends Fragment {
             sumaCalif=prom;
             mostrar=ValidarCajas(parMat1,parMat2,parMat3,ord);
             if(mostrar==1) {
-                Mt1.setText(String.valueOf(prom));
+                Mt1.setText(String.valueOf(prom).substring(0,3));
                 totalMate=totalMate+1;
+                asignarColor(prom,Mt1);
             }else {
                 Mt1.setText("");
+                Mt1.setBackgroundResource(R.drawable.boton_azulclaro);
             }
 
             parMat1=calFinal.getP1Materia2();
@@ -124,10 +126,12 @@ public class contenidoFinalSimul extends Fragment {
             sumaCalif=sumaCalif+prom;
             mostrar=ValidarCajas(parMat1,parMat2,parMat3,ord);
             if(mostrar==1){
-                Mt2.setText(String.valueOf(prom));
+                Mt2.setText(String.valueOf(prom).substring(0,3));
                 totalMate=totalMate+1;
+                asignarColor(prom,Mt2);
             }else {
                 Mt2.setText("");
+                Mt2.setBackgroundResource(R.drawable.boton_azulclaro);
             }
 
 
@@ -140,10 +144,12 @@ public class contenidoFinalSimul extends Fragment {
             sumaCalif=sumaCalif+prom;
             mostrar=ValidarCajas(parMat1,parMat2,parMat3,ord);
             if(mostrar==1){
-                Mt3.setText(String.valueOf(prom));
+                Mt3.setText(String.valueOf(prom).substring(0,3));
                 totalMate=totalMate+1;
+                asignarColor(prom,Mt3);
             }else {
                 Mt3.setText("");
+                Mt3.setBackgroundResource(R.drawable.boton_azulclaro);
             }
 
 
@@ -156,10 +162,12 @@ public class contenidoFinalSimul extends Fragment {
             sumaCalif=sumaCalif+prom;
             mostrar=ValidarCajas(parMat1,parMat2,parMat3,ord);
             if(mostrar==1){
-                Mt4.setText(String.valueOf(prom));
+                Mt4.setText(String.valueOf(prom).substring(0,3));
                 totalMate=totalMate+1;
+                asignarColor(prom,Mt4);
             }else {
                 Mt4.setText("");
+                Mt3.setBackgroundResource(R.drawable.boton_azulclaro);
             }
 
 
@@ -172,21 +180,29 @@ public class contenidoFinalSimul extends Fragment {
             sumaCalif=sumaCalif+prom;
             mostrar=ValidarCajas(parMat1,parMat2,parMat3,ord);
             if(mostrar==1){
-                Mt5.setText(String.valueOf(prom));
+                Mt5.setText(String.valueOf(prom).substring(0,3));
                 totalMate=totalMate+1;
+                asignarColor(prom,Mt5);
             }else {
                 Mt5.setText("");
+                Mt5.setBackgroundResource(R.drawable.boton_azulclaro);
             }
 
             //Calcular el promedio final
             promedioFinal=sumaCalif/5;
             promedio.setText(String.valueOf(promedioFinal));
 
-            if(totalMate==5){
-                promedio.setText(String.valueOf(promedioFinal));
+            if(totalMate==5){//Si ya estan todas las calificaciònes se imprime el promedio final
+                promedio.setText(String.valueOf(promedioFinal).substring(0,3));
+                if (promedioFinal<6){//Seleccionando color para las cajas de texto
+                    promedio.setBackgroundResource(R.drawable.boton_rojo);
+                }else {
+                    promedio.setBackgroundResource(R.drawable.boton_azul);
+                }
             }else
-            {
+            {//Si se borra la calificacion de alguna caja se queda vacìo la caja del promedio final y se regresa a su color de inicio
                 promedio.setText("");
+                promedio.setBackgroundResource(R.drawable.boton_azul);
             }
         } catch (Exception nfe) {
             System.out.println("Error en contenidoFinalSimul... " + nfe);
@@ -204,6 +220,12 @@ public class contenidoFinalSimul extends Fragment {
         }
         return regresar;
     }
-
-
+    //Procedimiento para asignar color a las cajas de texto
+    private void asignarColor(double calif, EditText caja) {
+        if(calif<6.0){
+            caja.setBackgroundResource(R.drawable.boton_rojo);
+        }else {
+            caja.setBackgroundResource(R.drawable.boton_azulclaro);
+        }
+    }
 }

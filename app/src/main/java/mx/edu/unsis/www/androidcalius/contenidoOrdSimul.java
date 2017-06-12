@@ -166,64 +166,84 @@ public class contenidoOrdSimul extends Fragment {
             aux=orMt1.getText().toString();
             if(aux.equals(""))
             {
+                orMt1.setBackgroundResource(R.drawable.boton_azulclaro);
             }else {
                 materia1or=Double.parseDouble(orMt1.getText().toString());
                 if(ord.validarCali(materia1or)==1)
                 {
                     orMt1.setText("");
                     materia1or=-1.0;
-                }else
-                totalMate = totalMate + 1;
+                    orMt1.setBackgroundResource(R.drawable.boton_azulclaro);
+                }else {
+                    totalMate = totalMate + 1;
+                    asignarColor(materia1or,orMt1);
+                }
             }
 
             aux=orMt2.getText().toString();
             if(aux.equals(""))
             {
+                orMt2.setBackgroundResource(R.drawable.boton_azulclaro);
             }else {
                 materia2or=Double.parseDouble(orMt2.getText().toString());
                 if (ord.validarCali(materia2or)==1)
                 {
                     orMt2.setText("");
                     materia2or=-1.0;
-                }else
-                totalMate = totalMate + 1;
+                    orMt2.setBackgroundResource(R.drawable.boton_azulclaro);
+                }else {
+                    totalMate = totalMate + 1;
+                    asignarColor(materia2or,orMt2);
+                }
             }
 
             aux=orMt3.getText().toString();
             if(aux.equals("")){
+                orMt3.setBackgroundResource(R.drawable.boton_azulclaro);
             }else {
                 materia3or=Double.parseDouble(orMt3.getText().toString());
                 if(ord.validarCali(materia3or)==1)
                 {
                     orMt3.setText("");
                     materia3or=-1.0;
-                }else
-                totalMate = totalMate + 1;
+                    orMt3.setBackgroundResource(R.drawable.boton_azulclaro);
+                }else {
+                    totalMate = totalMate + 1;
+                    asignarColor(materia3or,orMt3);
+                }
             }
 
             aux=orMt4.getText().toString();
             if (aux.equals("")){
+                orMt4.setBackgroundResource(R.drawable.boton_azulclaro);
             }else {
                 materia4or=Double.parseDouble(orMt4.getText().toString());
                 if (ord.validarCali(materia4or)==1)
                 {
                     orMt4.setText("");
                     materia4or=-1.0;
-                }else
-                totalMate = totalMate + 1;
+                    orMt4.setBackgroundResource(R.drawable.boton_azulclaro);
+                }else {
+                    totalMate = totalMate + 1;
+                    asignarColor(materia4or,orMt4);
+                }
             }
 
             aux=orMt5.getText().toString();
             if(aux.equals(""))
             {
+                orMt5.setBackgroundResource(R.drawable.boton_azulclaro);
             }else {
                 materia5or=Double.parseDouble(orMt5.getText().toString());
                 if (ord.validarCali(materia5or)==1)
                 {
                     orMt5.setText("");
                     materia5or=-1.0;
-                }else
-                totalMate = totalMate + 1;
+                    orMt5.setBackgroundResource(R.drawable.boton_azulclaro);
+                }else {
+                    totalMate = totalMate + 1;
+                    asignarColor(materia5or,orMt5);
+                }
             }
             ord.setOrMateria1(materia1or);
             ord.setOrMateria2(materia2or);
@@ -241,11 +261,25 @@ public class contenidoOrdSimul extends Fragment {
         } else {
             promedioparcial = sumaCalif / totalMate;
         }
-        if(totalMate==5){
-            promedio.setText(String.valueOf(promedioparcial));
+        if(totalMate==5){//Si ya estan todas las calificaciònes se imprime el promedio final
+            promedio.setText(String.valueOf(promedioparcial).substring(0,3));
+            if (promedioparcial<6){//Seleccionando color para las cajas de texto
+                promedio.setBackgroundResource(R.drawable.boton_rojo);
+            }else {
+                promedio.setBackgroundResource(R.drawable.boton_azul);
+            }
         }else
-        {
+        {//Si se borra la calificacion de alguna caja se queda vacìo la caja del promedio final y se regresa a su color de inicio
             promedio.setText("");
+            promedio.setBackgroundResource(R.drawable.boton_azul);
+        }
+    }
+    //Procedimiento para asignar color a las cajas de texto
+    private void asignarColor(double calif, EditText caja) {
+        if(calif<6.0){
+            caja.setBackgroundResource(R.drawable.boton_rojo);
+        }else {
+            caja.setBackgroundResource(R.drawable.boton_azulclaro);
         }
     }
 }
