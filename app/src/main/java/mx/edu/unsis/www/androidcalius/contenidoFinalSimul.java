@@ -112,6 +112,7 @@ public class contenidoFinalSimul extends Fragment {
                 Mt1.setText(String.valueOf(prom).substring(0,3));
                 totalMate=totalMate+1;
                 asignarColor(prom,Mt1);
+                calFinal.setPromMateria1(prom);
             }else {
                 Mt1.setText("");
                 Mt1.setBackgroundResource(R.drawable.boton_azulclaro);
@@ -129,6 +130,7 @@ public class contenidoFinalSimul extends Fragment {
                 Mt2.setText(String.valueOf(prom).substring(0,3));
                 totalMate=totalMate+1;
                 asignarColor(prom,Mt2);
+                calFinal.setPromMateria2(prom);
             }else {
                 Mt2.setText("");
                 Mt2.setBackgroundResource(R.drawable.boton_azulclaro);
@@ -147,6 +149,7 @@ public class contenidoFinalSimul extends Fragment {
                 Mt3.setText(String.valueOf(prom).substring(0,3));
                 totalMate=totalMate+1;
                 asignarColor(prom,Mt3);
+                calFinal.setPromMateria3(prom);
             }else {
                 Mt3.setText("");
                 Mt3.setBackgroundResource(R.drawable.boton_azulclaro);
@@ -165,6 +168,7 @@ public class contenidoFinalSimul extends Fragment {
                 Mt4.setText(String.valueOf(prom).substring(0,3));
                 totalMate=totalMate+1;
                 asignarColor(prom,Mt4);
+                calFinal.setPromMateria4(prom);
             }else {
                 Mt4.setText("");
                 Mt3.setBackgroundResource(R.drawable.boton_azulclaro);
@@ -183,6 +187,7 @@ public class contenidoFinalSimul extends Fragment {
                 Mt5.setText(String.valueOf(prom).substring(0,3));
                 totalMate=totalMate+1;
                 asignarColor(prom,Mt5);
+                calFinal.setPromMateria5(prom);
             }else {
                 Mt5.setText("");
                 Mt5.setBackgroundResource(R.drawable.boton_azulclaro);
@@ -199,8 +204,13 @@ public class contenidoFinalSimul extends Fragment {
                 }else {
                     promedio.setBackgroundResource(R.drawable.boton_azul);
                 }
+                //finale  del semeterse setear
+                calFinal.setVerificarCampos(true);
+                calFinal.setPromFinal(promedioFinal);
+
             }else
             {//Si se borra la calificacion de alguna caja se queda vacìo la caja del promedio final y se regresa a su color de inicio
+                calFinal.setVerificarCampos(false);
                 promedio.setText("");
                 promedio.setBackgroundResource(R.drawable.boton_azul);
             }

@@ -38,6 +38,10 @@ public class page_one extends Fragment {
                 tabLayout.setupWithViewPager(viewPager);
             }
         });
+        //instancia de la clase que guarada la posicion en el que esta
+        parciales guaradarPos=new parciales();
+        //Guardando la posicion de la aplicacion
+        guaradarPos.setPosicion("calificacion");
         return view;
     }
     private class sliderAdapter extends FragmentPagerAdapter{

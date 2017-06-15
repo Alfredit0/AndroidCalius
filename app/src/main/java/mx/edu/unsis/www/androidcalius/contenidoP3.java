@@ -54,33 +54,77 @@ public class contenidoP3 extends Fragment {
             matCal=datos.materiasEnVistas(1,3);
             materia1.setText(matCal[0]);
             p3Mt1.setText(matCal[1]);
-            if(matCal[1].isEmpty()){bandera=false;}else{promedio=Double.parseDouble(matCal[1])+promedio;}
+            if(matCal[1].isEmpty()){
+                bandera=false;
+            }else{
+                if(Double.parseDouble(matCal[1])<6){
+                    //color rojo del boton
+                    p3Mt1.setBackgroundResource(R.drawable.boton_rojo);
+                }
+                promedio=Double.parseDouble(matCal[1])+promedio;
+            }
 
             matCal=datos.materiasEnVistas(2,3);
             materia2.setText(matCal[0]);
             p3Mt2.setText(matCal[1]);
-            if(matCal[1].isEmpty() || !bandera){bandera=false;}else{promedio=Double.parseDouble(matCal[1])+promedio;}
+            if(matCal[1].isEmpty() || !bandera){
+                bandera=false;
+            }else{
+                if(Double.parseDouble(matCal[1])<6){
+                    //color rojo del boton
+                    p3Mt2.setBackgroundResource(R.drawable.boton_rojo);
+                }
+                promedio=Double.parseDouble(matCal[1])+promedio;
+            }
 
             matCal=datos.materiasEnVistas(3,3);
             materia3.setText(matCal[0]);
             p3Mt3.setText(matCal[1]);
-            if(matCal[1].isEmpty() || !bandera){bandera=false;}else{promedio=Double.parseDouble(matCal[1])+promedio;}
+            if(matCal[1].isEmpty() || !bandera){
+                bandera=false;
+            }else{
+                if(Double.parseDouble(matCal[1])<6){
+                    //color rojo del boton
+                    p3Mt3.setBackgroundResource(R.drawable.boton_rojo);
+                }
+                promedio=Double.parseDouble(matCal[1])+promedio;
+            }
 
             matCal=datos.materiasEnVistas(4,3);
             materia4.setText(matCal[0]);
             p3Mt4.setText(matCal[1]);
-            if(matCal[1].isEmpty() || !bandera){bandera=false;}else{promedio=Double.parseDouble(matCal[1])+promedio;}
+            if(matCal[1].isEmpty() || !bandera){
+                bandera=false;
+            }else{
+                if(Double.parseDouble(matCal[1])<6){
+                    //color rojo del boton
+                    p3Mt4.setBackgroundResource(R.drawable.boton_rojo);
+                }
+                promedio=Double.parseDouble(matCal[1])+promedio;
+            }
 
             matCal=datos.materiasEnVistas(5,3);
             materia5.setText(matCal[0]);
             p3Mt5.setText(matCal[1]);
-            if(matCal[1].isEmpty() || !bandera){bandera=false;}else{promedio=Double.parseDouble(matCal[1])+promedio;}
+            if(matCal[1].isEmpty() || !bandera){
+                bandera=false;
+            }else{
+                if(Double.parseDouble(matCal[1])<6){
+                    //color rojo del boton
+                    p3Mt5.setBackgroundResource(R.drawable.boton_rojo);
+                }
+                promedio=Double.parseDouble(matCal[1])+promedio;
+            }
 
             buttonPromedio=(Button)view.findViewById(R.id.prom);
             if(bandera){
                 promedio=promedio/5;
                 //para promedio tengo que sumar
                 buttonPromedio.setText(String.valueOf(promedio).substring(0,3));
+                if(promedio<6){
+                    //color rojo
+                    buttonPromedio.setBackgroundResource(R.drawable.boton_rojo);
+                }
             }else{
                 buttonPromedio.setText("");
             }

@@ -3,6 +3,7 @@ package mx.edu.unsis.www.androidcalius;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -56,12 +57,15 @@ public class actividadInicio extends AppCompatActivity
     private View mProgressView;
     private View mLoginFormView;
     private EditText gurdar;
-
+    //la ui del menu que se mostrara solo en el simulaador
+    MenuItem itemSetting;
 
     //metodos para obtener el periodo
     private void obtenerPeriodo() {
 
         new AsyncTask<Object, Object, Object>() {
+            @Override
+            protected void onCancelled() {showProgress(false);}
             @Override
             protected void onPostExecute(final Object result) {
                 //showProgress(false);
@@ -109,6 +113,8 @@ public class actividadInicio extends AppCompatActivity
     private void obtenerMaterias() {
 
         new AsyncTask<Object, Object, Object>() {
+            @Override
+            protected void onCancelled() {showProgress(false);}
             @Override
             protected void onPostExecute(final Object result) {
                 //showProgress(false);
@@ -272,54 +278,54 @@ public class actividadInicio extends AppCompatActivity
         //verificacion de la base de datos
         datos= new baseDatos(this, "calius",null,1);
         datos.abrir();
-        if(datos.leerUsuario()!=null){
-            if(datos.leerPeriodo()==null){
-                //si falla el pedido del periodo en primera instancia
-                obtenerPeriodo();
-                obtenerMaterias();
-                obtenerCalificaciones();
-            }else{
-                try {
-                    if(datos.leerMaterias(1)==null){
-                        //si falla el pedido de materias en primera intancia
-                        obtenerMaterias();
-                        obtenerCalificaciones();
-                    }else{
-                        if(datos.leerMaterias(0)==null){
-                            //si falla el pedido de calificaciones en primera instancia
+
+        if(con.isOnlineNet()){
+            if(datos.leerUsuario()!=null){
+                if(datos.leerPeriodo()==null){
+                    //si falla el pedido del periodo en primera instancia
+                    obtenerPeriodo();
+                    obtenerMaterias();
+                    obtenerCalificaciones();
+                }else{
+                    try {
+                        if(datos.leerMaterias(1)==null){
+                            //si falla el pedido de materias en primera intancia
+                            obtenerMaterias();
                             obtenerCalificaciones();
                         }else{
-                            //No hubo nigun fallo pero se tienen que actualizar las calificaciones
-                            datos.leerMaterias(1);
-                            obtenerCalificaciones();
+                            if(datos.leerMaterias(0)==null){
+                                //si falla el pedido de calificaciones en primera instancia
+                                obtenerCalificaciones();
+                            }else{
+                                //No hubo nigun fallo pero se tienen que actualizar las calificaciones
+                                datos.leerMaterias(1);
+                                obtenerCalificaciones();
 
+                            }
                         }
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
                     }
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
+                }
+                //prueba de que este el usuario
+                //Toast.makeText(this, "Ya hay usuario"+datos.leerUsuario()+" Periodo "+datos.leerPeriodo(), Toast.LENGTH_SHORT).show();setFragmet(new page_one());
+
+            }else{
+                //En primera instacnia se guarda el usuario
+                datos.insertarUsuario(con.getIduser());
+                try {
+                    //pedir el periodo
+                    obtenerPeriodo();
+                    //pedir las materias
+                    obtenerMaterias();
+                    //pedir callificaciones
+                    obtenerCalificaciones();
+                }catch (Exception e){
+                    Log.i("Error al obtener datos","");
                 }
             }
-            //prueba de que este el usuario
-            //Toast.makeText(this, "Ya hay usuario"+datos.leerUsuario()+" Periodo "+datos.leerPeriodo(), Toast.LENGTH_SHORT).show();setFragmet(new page_one());
-
         }else{
-            //En primera instacnia se guarda el usuario
-            datos.insertarUsuario(con.getIduser());
-            try {
-                //pedir el periodo
-                obtenerPeriodo();
-                //pedir las materias
-                obtenerMaterias();
-                //pedir callificaciones
-                obtenerCalificaciones();
-            }catch (Exception e){
-                Log.i("Error al obtener datos","");
-            }
-
-
-
-            //Toast.makeText(this, "Peridodo "+datos.leerPeriodo(), Toast.LENGTH_SHORT).show();
-            //Toast.makeText(this, "No existe usuario en BD pero el get si "+con.getIduser(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(contexto, "Sin conexión", Toast.LENGTH_SHORT).show();
         }
 
         setFragmet(new page_one());
@@ -342,8 +348,9 @@ public class actividadInicio extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.actividad_inicio, menu);
-        return true;
+            getMenuInflater().inflate(R.menu.actividad_inicio, menu);
+            itemSetting=menu.findItem(R.id.action_settings);
+            return true;
     }
 
     @Override
@@ -352,11 +359,20 @@ public class actividadInicio extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             if(posicion.getPosicion().equals("simulador")) {
-                Toast.makeText(this, "Los datos del simulador  se estan guardando ", Toast.LENGTH_SHORT).show();
+                //instanciar la base de datos tos para guaradra simulacion
+                datos= new baseDatos(this, "calius",null,1);
+                //verificar si todos los campos de simulacion estan llenos
+                if(posicion.isVerificarCampos()){
+                    //guardarSimulacion
+                    datos.guardarSimulacion();
+                    Toast.makeText(this, "Los datos se guarcaron exitosamente "+posicion.getP1Materia1(), Toast.LENGTH_SHORT).show();
+
+                }else{
+                    Toast.makeText(this, "Algunos campos estan vacíos ", Toast.LENGTH_SHORT).show();
+                }
             }
             return true;
         }
@@ -369,18 +385,25 @@ public class actividadInicio extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-
         int id = item.getItemId();
         FragmentManager fragmentManager=getSupportFragmentManager();
         Fragment fragment;
         if (id == R.id.nav_cal) {
             setFragmet(new page_one());
+            itemSetting.setVisible(false);
+            getSupportActionBar().setTitle(item.getTitle());
         } else if (id == R.id.nav_sim) {
             setFragmet(new simulador());
+            itemSetting.setVisible(true);
+            getSupportActionBar().setTitle(item.getTitle());
         } else if (id == R.id.nav_not) {
             setFragmet(new notificaciones());
+            itemSetting.setVisible(false);
+            getSupportActionBar().setTitle(item.getTitle());
         } else if (id == R.id.nav_acd) {
-            Toast.makeText(this,"Acerca de",Toast.LENGTH_SHORT).show();
+            setFragmet(new acercaDe());
+            itemSetting.setVisible(false);
+            getSupportActionBar().setTitle(item.getTitle());
         } else if (id == R.id.nav_ces) {
             //Eliminar base de datos del usuario que cierra sesion
             try {
@@ -399,7 +422,6 @@ public class actividadInicio extends AppCompatActivity
                 Toast.makeText(this,"Cerrar sesión",Toast.LENGTH_SHORT).show();
             }
             //eliminar del sharePreferences el idRegistration
-
         }
 
 

@@ -48,6 +48,10 @@ public class notificaciones extends ListFragment {
         CustomArrayAdapter adapter=new CustomArrayAdapter(this,asuntos,destinatario,fecha);
         //bind adapter to the listFragmet
         setListAdapter(adapter);
+        //instancia de la clase que guarada la posicion en el que esta
+        parciales guaradarPos=new parciales();
+        //Guardando la posicion de la aplicacion
+        guaradarPos.setPosicion("notificacion");
         return view;
     }
     //handlig item click

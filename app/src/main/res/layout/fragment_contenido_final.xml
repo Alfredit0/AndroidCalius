@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="35dp"
                 android:layout_marginLeft="15dp"
-
+                android:text="Sin materia"
                 android:textSize="18dp"
                 android:textStyle="bold"
                 tools:layout_editor_absoluteX="42dp"
@@ -41,7 +41,6 @@
                 android:textStyle="bold"
                 android:background="@drawable/boton_redondo"
                 android:color="@drawable/boton_redondo"
-                android:text=""
                 android:textColor="#ECEFF1"
                 tools:layout_editor_absoluteX="200dp"
                 tools:layout_editor_absoluteY="30dp"
@@ -53,12 +52,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="115dp"
                 android:layout_marginLeft="15dp"
-
+                android:text="Sin materia"
                 android:textSize="18dp"
                 android:textStyle="bold"
                 tools:layout_editor_absoluteX="42dp"
                 tools:layout_editor_absoluteY="101dp" />
-
             <Button
                 android:id="@+id/calif2"
                 android:layout_width="60dp"
@@ -69,7 +67,6 @@
                 android:textStyle="bold"
                 android:background="@drawable/boton_redondo"
                 android:color="@drawable/boton_redondo"
-                android:text=""
                 android:textColor="#ECEFF1"
                 tools:layout_editor_absoluteX="200dp"
                 tools:layout_editor_absoluteY="30dp"
@@ -81,7 +78,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="195dp"
                 android:layout_marginLeft="15dp"
-
+                android:text="Sin materia"
                 android:textSize="18dp"
                 android:textStyle="bold"
                 tools:layout_editor_absoluteX="42dp"
@@ -97,7 +94,6 @@
                 android:textStyle="bold"
                 android:background="@drawable/boton_redondo"
                 android:color="@drawable/boton_redondo"
-                android:text=""
                 android:textColor="#ECEFF1"
                 tools:layout_editor_absoluteX="200dp"
                 tools:layout_editor_absoluteY="30dp"
@@ -109,7 +105,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="275dp"
                 android:layout_marginLeft="15dp"
-
+                android:text="Sin materia"
                 android:textSize="18dp"
                 android:textStyle="bold"
                 tools:layout_editor_absoluteX="42dp"
@@ -125,7 +121,6 @@
                 android:textStyle="bold"
                 android:background="@drawable/boton_redondo"
                 android:color="@drawable/boton_redondo"
-                android:text=""
                 android:textColor="#ECEFF1"
                 tools:layout_editor_absoluteX="200dp"
                 tools:layout_editor_absoluteY="30dp"
@@ -137,7 +132,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="355dp"
                 android:layout_marginLeft="15dp"
-
+                android:text="Sin materia"
                 android:textSize="18dp"
                 android:textStyle="bold"
                 tools:layout_editor_absoluteX="42dp"
@@ -153,7 +148,6 @@
                 android:textStyle="bold"
                 android:background="@drawable/boton_redondo"
                 android:color="@drawable/boton_redondo"
-                android:text=""
                 android:textColor="#ECEFF1"
                 tools:layout_editor_absoluteX="200dp"
                 tools:layout_editor_absoluteY="30dp"
@@ -181,7 +175,6 @@
                 android:textStyle="bold"
                 android:background="@drawable/boton_redondo"
                 android:color="@drawable/boton_redondo"
-                android:text=""
                 android:textColor="#ECEFF1"
                 tools:layout_editor_absoluteX="200dp"
                 tools:layout_editor_absoluteY="30dp"

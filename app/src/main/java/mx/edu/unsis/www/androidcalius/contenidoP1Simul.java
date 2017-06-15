@@ -37,8 +37,7 @@ public class contenidoP1Simul extends Fragment  {
                 // Inflate the layout for this fragment
                 View view = inflater.inflate(R.layout.fragment_contenido_p1_simul,
                         container, false);
-                // Guardando la la posicion de la aplicacion
-                par1.setPosicion("simulador");
+
                 //mandar a llamr los elementos del fragmentos text view y notones
                 materia1=(TextView)view.findViewById(R.id.materia1);
                 materia2=(TextView)view.findViewById(R.id.materia2);
@@ -59,26 +58,49 @@ public class contenidoP1Simul extends Fragment  {
                 datos.abrir();
                 String[] matCal;
                 try {
-                    matCal=datos.materiasEnVistas(1,1);
-                    materia1.setText(matCal[0]);
-                    p1Mt1.setText(matCal[1]);
+                    if(datos.isSimulacion()){
+                        //leer de simulacion
+                        matCal=datos.materiasEnVistas(1,1);
+                        materia1.setText(matCal[0]);
+                        p1Mt1.setText(datos.leerSimulacion(1));
 
-                    matCal=datos.materiasEnVistas(2,1);
-                    materia2.setText(matCal[0]);
-                    p1Mt2.setText(matCal[1]);
+                        matCal=datos.materiasEnVistas(2,1);
+                        materia2.setText(matCal[0]);
+                        p1Mt2.setText(datos.leerSimulacion(2));
 
-                    matCal=datos.materiasEnVistas(3,1);
-                    materia3.setText(matCal[0]);
-                    p1Mt3.setText(matCal[1]);
+                        matCal=datos.materiasEnVistas(3,1);
+                        materia3.setText(matCal[0]);
+                        p1Mt3.setText(datos.leerSimulacion(3));
 
-                    matCal=datos.materiasEnVistas(4,1);
-                    materia4.setText(matCal[0]);
-                    p1Mt4.setText(matCal[1]);
+                        matCal=datos.materiasEnVistas(4,1);
+                        materia4.setText(matCal[0]);
+                        p1Mt4.setText(datos.leerSimulacion(4));
 
-                    matCal=datos.materiasEnVistas(5,1);
-                    materia5.setText(matCal[0]);
-                    p1Mt5.setText(matCal[1]);
+                        matCal=datos.materiasEnVistas(5,1);
+                        materia5.setText(matCal[0]);
+                        p1Mt5.setText(datos.leerSimulacion(5));
 
+                    }else{
+                        matCal=datos.materiasEnVistas(1,1);
+                        materia1.setText(matCal[0]);
+                        p1Mt1.setText(matCal[1]);
+
+                        matCal=datos.materiasEnVistas(2,1);
+                        materia2.setText(matCal[0]);
+                        p1Mt2.setText(matCal[1]);
+
+                        matCal=datos.materiasEnVistas(3,1);
+                        materia3.setText(matCal[0]);
+                        p1Mt3.setText(matCal[1]);
+
+                        matCal=datos.materiasEnVistas(4,1);
+                        materia4.setText(matCal[0]);
+                        p1Mt4.setText(matCal[1]);
+
+                        matCal=datos.materiasEnVistas(5,1);
+                        materia5.setText(matCal[0]);
+                        p1Mt5.setText(matCal[1]);
+                    }
                 }catch (Exception e){
                 }
                 //Obteniendo promedio en caso de que ya existieran datos en la BD
@@ -276,6 +298,9 @@ public class contenidoP1Simul extends Fragment  {
             }else {
                 promedio.setBackgroundResource(R.drawable.boton_azul);
             }
+            //setear el promedio parcial
+            par1.setPromParcial1(promedioparcial);
+
         }else
         {//Si se borra la calificacion de alguna caja se queda vacìo la caja del promedio final y se regresa a su color de inicio
             promedio.setText("");

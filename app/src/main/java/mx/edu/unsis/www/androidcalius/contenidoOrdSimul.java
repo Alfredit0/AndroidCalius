@@ -46,25 +46,47 @@ public class contenidoOrdSimul extends Fragment {
         datos.abrir();
         String[] matCal;
         try {
-            matCal=datos.materiasEnVistas(1,4);
-            materia1.setText(matCal[0]);
-            orMt1.setText(matCal[1]);
+            if(datos.isSimulacion()){
+                matCal=datos.materiasEnVistas(1,4);
+                materia1.setText(matCal[0]);
+                orMt1.setText(datos.leerSimulacion(19));
 
-            matCal=datos.materiasEnVistas(2,4);
-            materia2.setText(matCal[0]);
-            orMt2.setText(matCal[1]);
+                matCal=datos.materiasEnVistas(2,4);
+                materia2.setText(matCal[0]);
+                orMt2.setText(datos.leerSimulacion(20));
 
-            matCal=datos.materiasEnVistas(3,4);
-            materia3.setText(matCal[0]);
-            orMt3.setText(matCal[1]);
+                matCal=datos.materiasEnVistas(3,4);
+                materia3.setText(matCal[0]);
+                orMt3.setText(datos.leerSimulacion(21));
 
-            matCal=datos.materiasEnVistas(4,4);
-            materia4.setText(matCal[0]);
-            orMt4.setText(matCal[1]);
+                matCal=datos.materiasEnVistas(4,4);
+                materia4.setText(matCal[0]);
+                orMt4.setText(datos.leerSimulacion(22));
 
-            matCal=datos.materiasEnVistas(5,4);
-            materia5.setText(matCal[0]);
-            orMt5.setText(matCal[1]);
+                matCal=datos.materiasEnVistas(5,4);
+                materia5.setText(matCal[0]);
+                orMt5.setText(datos.leerSimulacion(23));
+            }else{
+                matCal=datos.materiasEnVistas(1,4);
+                materia1.setText(matCal[0]);
+                orMt1.setText(matCal[1]);
+
+                matCal=datos.materiasEnVistas(2,4);
+                materia2.setText(matCal[0]);
+                orMt2.setText(matCal[1]);
+
+                matCal=datos.materiasEnVistas(3,4);
+                materia3.setText(matCal[0]);
+                orMt3.setText(matCal[1]);
+
+                matCal=datos.materiasEnVistas(4,4);
+                materia4.setText(matCal[0]);
+                orMt4.setText(matCal[1]);
+
+                matCal=datos.materiasEnVistas(5,4);
+                materia5.setText(matCal[0]);
+                orMt5.setText(matCal[1]);
+            }
 
         }catch (Exception e){}
         obtenerdatos();
@@ -268,6 +290,7 @@ public class contenidoOrdSimul extends Fragment {
             }else {
                 promedio.setBackgroundResource(R.drawable.boton_azul);
             }
+            ord.setPromOrd(promedioparcial);
         }else
         {//Si se borra la calificacion de alguna caja se queda vacìo la caja del promedio final y se regresa a su color de inicio
             promedio.setText("");

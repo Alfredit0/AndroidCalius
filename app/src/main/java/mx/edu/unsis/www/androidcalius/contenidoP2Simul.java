@@ -46,31 +46,58 @@ public class contenidoP2Simul extends Fragment {
         datos.abrir();
         String[] matCal;
         try {
-            matCal=datos.materiasEnVistas(1,2);
-            materia1.setText(matCal[0]);
-           p2Mt1.setText(matCal[1]);
-           // p2Mt1.setText("0.0");
+            if(datos.isSimulacion()){
+                matCal=datos.materiasEnVistas(1,2);
+                materia1.setText(matCal[0]);
+                p2Mt1.setText(datos.leerSimulacion(7));
+                // p2Mt1.setText("0.0");
 
-            matCal=datos.materiasEnVistas(2,2);
-            materia2.setText(matCal[0]);
-            p2Mt2.setText(matCal[1]);
-            //p2Mt2.setText("0.0");
+                matCal=datos.materiasEnVistas(2,2);
+                materia2.setText(matCal[0]);
+                p2Mt2.setText(datos.leerSimulacion(8));
+                //p2Mt2.setText("0.0");
 
-            matCal=datos.materiasEnVistas(3,2);
-            materia3.setText(matCal[0]);
-            p2Mt3.setText(matCal[1]);
-            //p2Mt3.setText("0.0");
+                matCal=datos.materiasEnVistas(3,2);
+                materia3.setText(matCal[0]);
+                p2Mt3.setText(datos.leerSimulacion(9));
+                //p2Mt3.setText("0.0");
 
-            matCal=datos.materiasEnVistas(4,2);
-            materia4.setText(matCal[0]);
-            p2Mt4.setText(matCal[1]);
-            //p2Mt4.setText("0.0");
+                matCal=datos.materiasEnVistas(4,2);
+                materia4.setText(matCal[0]);
+                p2Mt4.setText(datos.leerSimulacion(10));
+                //p2Mt4.setText("0.0");
 
-            matCal=datos.materiasEnVistas(5,2);
-            materia5.setText(matCal[0]);
-            p2Mt5.setText(matCal[1]);
-            //p2Mt5.setText("0.0");
+                matCal=datos.materiasEnVistas(5,2);
+                materia5.setText(matCal[0]);
+                p2Mt5.setText(datos.leerSimulacion(11));
+                //p2Mt5.setText("0.0");
 
+            }else{
+                matCal=datos.materiasEnVistas(1,2);
+                materia1.setText(matCal[0]);
+                p2Mt1.setText(matCal[1]);
+                // p2Mt1.setText("0.0");
+
+                matCal=datos.materiasEnVistas(2,2);
+                materia2.setText(matCal[0]);
+                p2Mt2.setText(matCal[1]);
+                //p2Mt2.setText("0.0");
+
+                matCal=datos.materiasEnVistas(3,2);
+                materia3.setText(matCal[0]);
+                p2Mt3.setText(matCal[1]);
+                //p2Mt3.setText("0.0");
+
+                matCal=datos.materiasEnVistas(4,2);
+                materia4.setText(matCal[0]);
+                p2Mt4.setText(matCal[1]);
+                //p2Mt4.setText("0.0");
+
+                matCal=datos.materiasEnVistas(5,2);
+                materia5.setText(matCal[0]);
+                p2Mt5.setText(matCal[1]);
+                //p2Mt5.setText("0.0");
+            }
         }catch (Exception e){}
         //Obteniendo promedio en caso de que ya existieran datos en la BD
             obtenerdatos();
@@ -274,6 +301,7 @@ public class contenidoP2Simul extends Fragment {
             }else {
                 promedio.setBackgroundResource(R.drawable.boton_azul);
             }
+            par2.setPromParcial2(promedioparcial);
         }else
         {//Si se borra la calificacion de alguna caja se queda vacìo la caja del promedio final y se regresa a su color de inicio
             promedio.setText("");

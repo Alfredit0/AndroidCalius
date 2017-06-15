@@ -32,12 +32,26 @@ public class parciales {
     static private Double orMateria4;
     static private Double orMateria5;
 
+    //varibles de promedios parciales
+    static private Double promParcial1;
+    static private Double promParcial2;
+    static private Double promParcial3;
+    static private Double promOrd;
+    static private Double promFinal;
+    //variables de promedios finales por materia
+    static private Double promMateria1;
+    static private Double promMateria2;
+    static private Double promMateria3;
+    static private Double promMateria4;
+    static private Double promMateria5;
+
+
     static private boolean Materia1;
     static private boolean Materia2;
     static private boolean Materia3;
     static private boolean Materia4;
     static private boolean Materia5;
-
+    static private boolean verificarCampos;
 
 
     public  boolean isMateria1() {
@@ -250,11 +264,100 @@ public class parciales {
         this.posicion = posicion;
     }
 
+    public boolean isVerificarCampos() {
+        return verificarCampos;
+    }
+
+    public void setVerificarCampos(boolean verificarCampos) {
+        this.verificarCampos = verificarCampos;
+    }
+
     int validarCali(double calif) {
         if(calif>10 || calif <0)
         {
             return 1;
         }else
             return -1;
+    }
+    //ssters y geters que hacen falta
+
+    public Double getPromParcial1() {
+        return promParcial1;
+    }
+
+    public void setPromParcial1(Double promParcial1) {
+        this.promParcial1 = promParcial1;
+    }
+
+    public Double getPromParcial2() {
+        return promParcial2;
+    }
+
+    public void setPromParcial2(Double promParcial2) {
+        this.promParcial2 = promParcial2;
+    }
+
+    public Double getPromParcial3() {
+        return promParcial3;
+    }
+
+    public void setPromParcial3(Double promParcial3) {
+        this.promParcial3 = promParcial3;
+    }
+
+    public Double getPromOrd() {
+        return promOrd;
+    }
+
+    public void setPromOrd(Double promOrd) {
+        this.promOrd = promOrd;
+    }
+
+    public Double getPromFinal() {
+        return promFinal;
+    }
+
+    public void setPromFinal(Double promFinal) {
+        this.promFinal = promFinal;
+    }
+
+    public Double getPromMateria1() {
+        return promMateria1;
+    }
+
+    public void setPromMateria1(Double promMateria1) {
+        this.promMateria1 = promMateria1;
+    }
+
+    public Double getPromMateria2() {
+        return promMateria2;
+    }
+
+    public void setPromMateria2(Double promMateria2) {
+        this.promMateria2 = promMateria2;
+    }
+
+    public Double getPromMateria3() {
+        return promMateria3;
+    }
+
+    public void setPromMateria3(Double promMateria3) {
+        this.promMateria3 = promMateria3;
+    }
+
+    public Double getPromMateria4() {
+        return promMateria4;
+    }
+
+    public void setPromMateria4(Double promMateria4) {
+        this.promMateria4 = promMateria4;
+    }
+
+    public Double getPromMateria5() {
+        return promMateria5;
+    }
+
+    public void setPromMateria5(Double promMateria5) {
+        this.promMateria5 = promMateria5;
     }
 }

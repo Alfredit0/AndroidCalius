@@ -32,6 +32,9 @@ public class simulador extends Fragment {
                 tabLayout.setupWithViewPager(viewPager);
             }
         });
+        parciales guaradarPos=new parciales();
+        // Guardando la la posicion de la aplicacion
+        guaradarPos.setPosicion("simulador");
         return view;
     }
 
@@ -86,6 +89,7 @@ public class simulador extends Fragment {
             }
         }
     }
+
 
 
 }
