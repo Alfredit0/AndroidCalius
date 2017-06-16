@@ -70,10 +70,6 @@ public class GcmIntentService extends IntentService {
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
                 new Intent(this, actividadInicio.class), 0);
 
-
-
-
-
         //convirtiendo el mensaje en un objeto json
 
         JSONObject json = new JSONObject(msg);
