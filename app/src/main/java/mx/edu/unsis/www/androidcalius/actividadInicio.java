@@ -325,8 +325,15 @@ public class actividadInicio extends AppCompatActivity
         }else{
             Toast.makeText(contexto, "Sin conexión", Toast.LENGTH_SHORT).show();
         }
-
-        setFragmet(new page_one());
+        if(posicion.isNotificacion()) {
+            posicion.setNotificacion(false);
+            setFragmet(new notificaciones());
+        }else
+        {
+            setFragmet(new page_one());
+            //setFragmet(new notificaciones());
+        }
+        //setFragmet(new page_one());
         //setFragmet(new page_one());
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);

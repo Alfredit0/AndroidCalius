@@ -7,7 +7,8 @@ package mx.edu.unsis.www.androidcalius;
 public class parciales {
     public parciales(){};
     //Guardara la posicion donde se encuentra el usuario
-   static private String posicion;
+    static    private boolean notificacion=false;
+    static private String posicion;
     static private Double p1Materia1;
     static private Double p1Materia2;
     static private Double p1Materia3;
@@ -359,5 +360,13 @@ public class parciales {
 
     public void setPromMateria5(Double promMateria5) {
         this.promMateria5 = promMateria5;
+    }
+
+    public boolean isNotificacion() {
+        return notificacion;
+    }
+
+    public void setNotificacion(boolean notificacion) {
+        this.notificacion = notificacion;
     }
 }

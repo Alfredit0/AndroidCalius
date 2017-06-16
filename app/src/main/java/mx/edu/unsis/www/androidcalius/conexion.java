@@ -93,7 +93,7 @@ public class conexion {
     }
     public JSONObject obtenerRespuesta(HttpsURLConnection conn) throws IOException, JSONException {
         InputStream in = new BufferedInputStream(conn.getInputStream());
-        BufferedReader reader = new BufferedReader(new InputStreamReader(in,"UTF-8"));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(in,"ISO-8859-1"));
         StringBuilder result = new StringBuilder();
         String line;
         //obtener el resultado
