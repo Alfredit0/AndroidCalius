@@ -6,6 +6,7 @@ import android.annotation.TargetApi;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -48,17 +49,14 @@ public class actividadInicio extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     // instanciando parciales para obtener la posicion de la aplicacion en ejecucion
     parciales posicion=new parciales();
-   guardarContednidoSimulador guardarSimul=new guardarContednidoSimulador();
-    ViewPager mViewPager;
     conexion con=new conexion();
     baseDatos datos;
-    private String iduser;
-    private String Database_path="/data/data/mx.edu.unsis.www.androidcalius/databases/calius.db";
     private View mProgressView;
     private View mLoginFormView;
-    private EditText gurdar;
     //la ui del menu que se mostrara solo en el simulaador
     MenuItem itemSetting;
+    // aplicación el dentificador de registro en GCM
+    private static final String PROPERTY_REG_ID = "registration_id";
 
     //metodos para obtener el periodo
     private void obtenerPeriodo() {
@@ -416,6 +414,16 @@ public class actividadInicio extends AppCompatActivity
             try {
                 actividadInicio.this.deleteDatabase("calius");
             }catch (Exception e){}
+            //eliminar del sharePreferences el idRegistration
+            final SharedPreferences prefs = getPreferenciasCompartidas();
+            String registrationId = prefs.getString(PROPERTY_REG_ID, "");
+            Toast.makeText(this, "id " +registrationId, Toast.LENGTH_SHORT).show();
+            //registrationId="";
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.remove(PROPERTY_REG_ID);
+           // editor.putString(PROPERTY_REG_ID, registrationId);
+            editor.clear();
+            editor.commit();
             //eliminar el indicador de una sesion abierta
             try {
                 File dir = getFilesDir();
@@ -428,7 +436,6 @@ public class actividadInicio extends AppCompatActivity
             {
                 Toast.makeText(this,"Cerrar sesión",Toast.LENGTH_SHORT).show();
             }
-            //eliminar del sharePreferences el idRegistration
         }
 
 
@@ -442,5 +449,14 @@ public class actividadInicio extends AppCompatActivity
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+    }
+    /**
+     * Metodo que sirve para recupera las preferencias compartidas en modo privado
+     *
+     * @return Application's {@code SharedPreferences}.
+     */
+    private SharedPreferences getPreferenciasCompartidas() {
+        return getSharedPreferences(actividadAcceso.class.getSimpleName(),
+                Context.MODE_PRIVATE);
     }
 }
