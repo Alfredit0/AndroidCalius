@@ -14,7 +14,6 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -26,15 +25,13 @@
                 android:id="@+id/materia1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="33dp"
                 android:layout_marginLeft="30dp"
                 android:text="Calidad de software"
                 android:textSize="18dp"
                 android:textStyle="bold"
                 tools:layout_editor_absoluteX="42dp"
                 tools:layout_editor_absoluteY="101dp" />
-
-
             <EditText
                 android:id="@+id/calif1"
                 android:layout_width="60dp"
@@ -54,7 +51,7 @@
                 android:id="@+id/materia2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="115dp"
+                android:layout_marginTop="110dp"
                 android:layout_marginLeft="30dp"
                 android:text="Redes"
                 android:textSize="18dp"
@@ -81,7 +78,7 @@
                 android:id="@+id/materia3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="195dp"
+                android:layout_marginTop="187dp"
                 android:layout_marginLeft="30dp"
                 android:text="Sistemas distrubuidos"
                 android:textSize="18dp"
@@ -107,7 +104,7 @@
                 android:id="@+id/materia4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="275dp"
+                android:layout_marginTop="264dp"
                 android:layout_marginLeft="30dp"
                 android:text="Base de datos"
                 android:textSize="18dp"
@@ -133,7 +130,7 @@
                 android:id="@+id/materia5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="355dp"
+                android:layout_marginTop="341dp"
                 android:layout_marginLeft="30dp"
                 android:text="Algebra lineal"
                 android:textSize="18dp"
@@ -159,7 +156,7 @@
                 android:id="@+id/promedio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="435dp"
+                android:layout_marginTop="418dp"
                 android:layout_marginLeft="30dp"
                 android:text="Promedio"
                 android:textSize="18dp"

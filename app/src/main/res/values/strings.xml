@@ -15,10 +15,10 @@
     <string name="contraseña">Contraseña</string>
     <string name="confirmarContraseña">Confirmar</string>
 
-    <string name="registroLabel">Ingrese los datos que se te piden:</string>
-    <string name="verificacionLabel">Ingrese código de verificación:</string>
+    <string name="registroLabel">Ingrese sus datos</string>
+    <string name="verificacionLabel">Ingrese el código de verificación</string>
     <string name="contraseñaLabel">Ingrese una contraseña </string>
-    <string name="contraseñaLabel2">para su cuenta:</string>
+    <string name="contraseñaLabel2">para su cuenta</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">Formato de matrícula inválida</string>
     <string name="error_invalid_tel">Formato de teléfono inválida</string>

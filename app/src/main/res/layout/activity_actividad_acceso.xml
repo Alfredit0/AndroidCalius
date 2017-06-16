@@ -88,10 +88,10 @@
                 android:text="@string/action_sign_in"
                 android:textStyle="bold"
                 android:textColor="#FFFFFF"
-                android:background="#606060"
                 android:textSize="20dp"
                 android:textAllCaps="false"
-
+                android:background="@drawable/boton_acceso"
+                android:color="@drawable/boton_acceso"
                 />
             <Button
                 android:id="@+id/registro"
@@ -103,9 +103,10 @@
                 android:text="@string/registro"
                 android:textStyle="bold"
                 android:textColor="#FFFFFF"
-                android:background="#606060"
                 android:textSize="20dp"
-                android:textAllCaps="false"/>
+                android:textAllCaps="false"
+                android:background="@drawable/boton_acceso"
+                android:color="@drawable/boton_acceso"/>
 
         </LinearLayout>
     </ScrollView>

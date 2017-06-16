@@ -93,8 +93,6 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="390dp"
                 android:layout_centerHorizontal="true"
-
-                android:background="#606060"
                 android:text="@string/guardar"
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF"
@@ -103,7 +101,9 @@
                 tools:layout_editor_absoluteX="67dp"
                 tools:layout_editor_absoluteY="388dp"
                 android:layout_marginLeft="15dp"
-                android:layout_marginStart="15dp" />
+                android:layout_marginStart="15dp"
+                android:background="@drawable/boton_acceso"
+                android:color="@drawable/boton_acceso"/>
 
 
         </RelativeLayout>

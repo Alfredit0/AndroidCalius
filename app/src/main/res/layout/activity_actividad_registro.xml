@@ -82,10 +82,8 @@
             android:layout_width="250dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
-            android:layout_marginTop="300dp"
+            android:layout_marginTop="350dp"
             android:layout_centerHorizontal="true"
-
-            android:background="#606060"
             android:text="@string/enviar"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
@@ -94,7 +92,9 @@
             tools:layout_editor_absoluteX="67dp"
             tools:layout_editor_absoluteY="388dp"
             android:layout_marginLeft="15dp"
-            android:layout_marginStart="15dp" />
+            android:layout_marginStart="15dp"
+            android:background="@drawable/boton_acceso"
+            android:color="@drawable/boton_acceso"/>
 
 
     </RelativeLayout>
