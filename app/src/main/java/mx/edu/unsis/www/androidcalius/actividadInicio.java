@@ -450,6 +450,6 @@ public class actividadInicio extends AppCompatActivity
      */
     private SharedPreferences getPreferenciasCompartidas() {
         return getSharedPreferences(actividadAcceso.class.getSimpleName(),
-                Context.MODE_PRIVATE);
-    }
+    Context.MODE_PRIVATE);
+}
 }
