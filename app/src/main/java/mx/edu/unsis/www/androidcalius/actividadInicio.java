@@ -409,7 +409,8 @@ public class actividadInicio extends AppCompatActivity
             }catch (Exception e){}
             //eliminar del sharePreferences el idRegistration
             final SharedPreferences prefs = getPreferenciasCompartidas();
-            //String registrationId = prefs.getString(PROPERTY_REG_ID, "");
+            String registrationId = prefs.getString(PROPERTY_REG_ID, "");
+            Toast.makeText(this, "id " +registrationId, Toast.LENGTH_SHORT).show();
             //registrationId="";
             SharedPreferences.Editor editor = prefs.edit();
             editor.remove(PROPERTY_REG_ID);

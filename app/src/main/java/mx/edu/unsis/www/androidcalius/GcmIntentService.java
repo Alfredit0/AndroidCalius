@@ -68,18 +68,16 @@ public class GcmIntentService extends IntentService {
 
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
                 new Intent(this, actividadInicio.class), 0);
-
-        android.support.v4.app.NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
-                this).setSmallIcon(R.drawable.contacto_mail_icono)
-                .setContentTitle("Notificacion:" + msg)
-                .setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
-                .setContentText(msg);
+        //convirtiendo el mensaje en un objeto json
         JSONObject json = new JSONObject(msg);
         //guadar los datos del json en base de datos
         datos= new baseDatos(this, "calius",null,1);
         datos.guardarNotificaciones(json);
-
-
+        android.support.v4.app.NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
+                this).setSmallIcon(R.drawable.contacto_mail_icono)
+                .setContentTitle(json.get("remitente") +"")
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(json.get("asunto").toString()))
+                .setContentText(json.get("asunto").toString());
         mBuilder.setContentIntent(contentIntent);
         mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
     }
