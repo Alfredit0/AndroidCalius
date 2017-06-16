@@ -27,6 +27,7 @@ public class GcmIntentService extends IntentService {
     private NotificationManager mNotificationManager;
     NotificationCompat.Builder builder;
     baseDatos datos;
+    parciales gurdarNot=new parciales();
     public GcmIntentService() {
         super("GcmIntentService");
     }
@@ -73,12 +74,13 @@ public class GcmIntentService extends IntentService {
                 this).setSmallIcon(R.drawable.contacto_mail_icono)
                 .setContentTitle("Notificacion:" + msg)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
-                .setContentText(msg);
+                .setContentText(msg)
+                .setAutoCancel(true);
         JSONObject json = new JSONObject(msg);
         //guadar los datos del json en base de datos
         datos= new baseDatos(this, "calius",null,1);
         datos.guardarNotificaciones(json);
-
+        gurdarNot.setNotificacion(true);
 
         mBuilder.setContentIntent(contentIntent);
         mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
