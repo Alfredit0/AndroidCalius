@@ -26,14 +26,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -55,6 +58,7 @@ public class actividadInicio extends AppCompatActivity
     private View mLoginFormView;
     //la ui del menu que se mostrara solo en el simulaador
     MenuItem itemSetting;
+    MenuItem nombeUsuario;
     // aplicación el dentificador de registro en GCM
     private static final String PROPERTY_REG_ID = "registration_id";
 
@@ -337,6 +341,25 @@ public class actividadInicio extends AppCompatActivity
         //setFragmet(new page_one());
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        String texto = null;
+        try
+        {
+            BufferedReader fin =
+                    new BufferedReader(
+                            new InputStreamReader( openFileInput("sesion.txt")));
+
+            texto = fin.readLine();
+            fin.close();
+        }
+        catch (Exception ex)
+        {
+            Log.e("Ficheros", "Error al leer fichero desde memoria interna");
+        }
+
+        //Asignando el nombre del usuario en Cerrar Sesiòn
+        final Menu menu = navigationView.getMenu();
+        nombeUsuario=menu.findItem(R.id.nav_ces);
+        nombeUsuario.setTitle("Cerrar sesión ("+texto+")");
 
     }
 

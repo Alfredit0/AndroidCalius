@@ -677,7 +677,7 @@ public class actividadAcceso extends AppCompatActivity implements LoaderCallback
                                     new OutputStreamWriter(
                                             openFileOutput("sesion.txt", Context.MODE_PRIVATE));
 
-                            Sesion.write(""+mEmail+":"+mPassword+"");
+                            Sesion.write(response.getString("nombre"));
                             Sesion.close();
                         }
                         catch (Exception exx)
