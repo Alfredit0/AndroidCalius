@@ -331,7 +331,9 @@ public class actividadInicio extends AppCompatActivity
         }
         if(posicion.isNotificacion()) {
             posicion.setNotificacion(false);
+            getSupportActionBar().setTitle("Notificaciòn");
             setFragmet(new notificaciones());
+            getSupportActionBar().setTitle("Notificaciòn");
         }else
         {
             setFragmet(new page_one());
