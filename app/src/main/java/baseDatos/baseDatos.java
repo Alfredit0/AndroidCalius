@@ -24,9 +24,13 @@ import mx.edu.unsis.www.androidcalius.conexion;
 import mx.edu.unsis.www.androidcalius.parciales;
 
 /**
- * Created by Elvia on 23/05/2017.
+ * Created by Elvia on 23/05/2017. clase encargada de realizar aperaiones en la base de datos local SQLITE
  */
 
+
+/**
+ * Creacióin de base de datos
+ */
 public class baseDatos extends SQLiteOpenHelper {
     //creacion de la base de datos
     private static final String SQL = "create table USUARIO (MATRICULA TEXT PRIMARY KEY,PERIODO TEXT);";
@@ -66,7 +70,9 @@ public class baseDatos extends SQLiteOpenHelper {
         //valores.put("PERIODO",periodo);
         this.getWritableDatabase().insert("USUARIO",null,valores);
     }
-
+    /**
+     * Creacióin de base de datos
+     */
     public String leerUsuario(){
             String matricula=null;
             SQLiteDatabase db=this.getReadableDatabase();

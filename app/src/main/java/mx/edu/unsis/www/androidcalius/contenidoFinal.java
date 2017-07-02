@@ -40,11 +40,12 @@ public class contenidoFinal extends Fragment {
         p3Mt3=(Button)view.findViewById(R.id.calif3);
         p3Mt4=(Button)view.findViewById(R.id.calif4);
         p3Mt5=(Button)view.findViewById(R.id.calif5);
+        datos= new baseDatos(getContext(), "calius",null,1);
+        datos.abrir();
+        String[] matCal;
         //recorer la tabla materias de la base de datos
         try {
-            datos= new baseDatos(getContext(), "calius",null,1);
-            datos.abrir();
-            String[] matCal;
+
             matCal=datos.materiasEnVistas(1,0);
             materia1.setText(matCal[0]);
             p3Mt1.setText(matCal[1].substring(0,3));
@@ -60,6 +61,7 @@ public class contenidoFinal extends Fragment {
 
             matCal=datos.materiasEnVistas(2,0);
             materia2.setText(matCal[0]);
+
             p3Mt2.setText(matCal[1].substring(0,3));
             if(matCal[1].isEmpty() || !bandera){
                 bandera=false;
@@ -73,6 +75,7 @@ public class contenidoFinal extends Fragment {
 
             matCal=datos.materiasEnVistas(3,0);
             materia3.setText(matCal[0]);
+
             p3Mt3.setText(matCal[1].substring(0,3));
             if(matCal[1].isEmpty() || !bandera){
                 bandera=false;

@@ -43,6 +43,7 @@ public class actividadVerificarCodigo extends AppCompatActivity {
         setContentView(R.layout.activity_actividad_verificar_codigo);
         //obtener la referencia a la IU
         viewCodigo = (AutoCompleteTextView) findViewById(R.id.codigo);
+        getSupportActionBar().setTitle("Registro");
         viewCodigo.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {

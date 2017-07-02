@@ -80,7 +80,7 @@ public class GcmIntentService extends IntentService {
         gurdarNot.setNotificacion(true);
 
         android.support.v4.app.NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
-                this).setSmallIcon(R.drawable.contacto_mail_icono)
+                this).setSmallIcon(R.drawable.logo)
                 .setContentTitle(json.get("remitente") +"")
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(json.get("asunto").toString()))
                 .setContentText(json.get("asunto").toString())

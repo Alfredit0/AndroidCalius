@@ -303,7 +303,7 @@ public class actividadEnviarContrasena extends AppCompatActivity {
         //obtener el contendo de la IU
         viewContraseña = (AutoCompleteTextView) findViewById(R.id.contraseña);
         viewConfirm = (AutoCompleteTextView) findViewById(R.id.confirmContraseña);
-
+        getSupportActionBar().setTitle("Registro");
         Button guardar = (Button) findViewById(R.id.guardar);
         guardar.setOnClickListener(new View.OnClickListener() {
             @Override

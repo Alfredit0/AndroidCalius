@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AndroidCalius</string>
+    <string name="app_name">Calius</string>
 
     <!-- Strings related to login and register -->
     <string name="prompt_email">Matrícula</string>
@@ -17,6 +17,7 @@
 
     <string name="registroLabel">Ingrese sus datos</string>
     <string name="verificacionLabel">Ingrese el código de verificación</string>
+    <string name="version">Versión 1.1</string>
     <string name="contraseñaLabel">Ingrese una contraseña </string>
     <string name="contraseñaLabel2">para su cuenta</string>
     <string name="action_sign_in_short">Sign in</string>

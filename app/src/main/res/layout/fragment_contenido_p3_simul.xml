@@ -45,7 +45,8 @@
                 android:text="@string/palabra"
                 android:textColor="@color/texto"
                 android:textSize="20dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textAlignment="center"/>
 
             <TextView
                 android:id="@+id/materia2"
@@ -72,7 +73,8 @@
                 android:text="@string/palabra"
                 android:textColor="@color/texto"
                 android:textSize="20dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textAlignment="center"/>
 
             <TextView
                 android:id="@+id/materia3"
@@ -99,7 +101,8 @@
                 android:text="@string/palabra"
                 android:textColor="@color/texto"
                 android:textSize="20dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textAlignment="center"/>
             <TextView
                 android:id="@+id/materia4"
                 android:layout_width="wrap_content"
@@ -125,7 +128,8 @@
                 android:text="@string/palabra"
                 android:textColor="@color/texto"
                 android:textSize="20dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textAlignment="center"/>
             <TextView
                 android:id="@+id/materia5"
                 android:layout_width="wrap_content"
@@ -151,7 +155,8 @@
                 android:text="@string/palabra"
                 android:textColor="@color/texto"
                 android:textSize="20dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textAlignment="center"/>
             <TextView
                 android:id="@+id/promedio"
                 android:layout_width="wrap_content"
@@ -178,7 +183,8 @@
                 android:textColor="@color/texto"
                 android:textSize="20dp"
                 android:textStyle="bold"
-                android:enabled="false"/>
+                android:enabled="false"
+                android:textAlignment="center"/>
 
 
         </RelativeLayout>

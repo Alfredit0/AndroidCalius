@@ -3,6 +3,7 @@ package mx.edu.unsis.www.androidcalius;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -23,6 +24,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
@@ -49,6 +51,7 @@ public class actividadRegistro extends AppCompatActivity {
         //añadir boton regresar
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Registro");
         //obtener el contendo de la IU
         matricula = (AutoCompleteTextView) findViewById(R.id.matricula);
         matricula.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -208,6 +211,19 @@ public class actividadRegistro extends AppCompatActivity {
                     }else{
                         //guardar la sesion en alguna parte
                         ///////////////////////////////////
+                        try
+                        {
+                            OutputStreamWriter Sesion=
+                                    new OutputStreamWriter(
+                                            openFileOutput("sesion.txt", Context.MODE_PRIVATE));
+
+                            Sesion.write(response.getString("nombre"));
+                            Sesion.close();
+                        }
+                        catch (Exception exx)
+                        {
+                            Log.e("Ficheros", "Error al escribir fichero a memoria interna");
+                        }
                         return true;
                     }
                 }
